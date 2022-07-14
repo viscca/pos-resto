@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/loginimg"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimens_300dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:contentDescription="@string/nav_header_desc"
+        android:src="@drawable/labbaik" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/dimens_10dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:text="Masuk dengan username atau email"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/darkgrey"
+                android:typeface="sans" />
+
+            <EditText
+                android:id="@+id/eUserID"
+                style="@style/MyEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:autofillHints="username"
+                android:hint="Username atau Email"
+                android:inputType="textVisiblePassword"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:theme="@style/MyFloatEditText">
+
+                <requestFocus />
+            </EditText>
+
+            <com.pos.restokasir.tools.ShowHidePasswordEditText
+                android:id="@+id/ePassword"
+                style="@style/MyEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:autofillHints="password"
+                android:hint="Kata Sandi"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:theme="@style/MyFloatEditText">
+            </com.pos.restokasir.tools.ShowHidePasswordEditText>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtLupa"
+                    style="@style/TextKlik"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Lupa Kata Sandi?"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:typeface="sans" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnlogin"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:text="Masuk"
+                android:textAppearance="?android:attr/textAppearanceButton" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

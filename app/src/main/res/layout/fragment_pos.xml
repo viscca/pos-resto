@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/grey"
+    tools:context=".ui.fragment.PosFragment"
+    android:baselineAligned="false">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:layout_weight=".70"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <EditText
+            android:id="@+id/eCari"
+            style="@style/MyEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:autofillHints="username"
+            android:drawableEnd="@drawable/ic_search"
+            android:hint="Cari"
+            android:inputType="textVisiblePassword"
+            android:singleLine="true"
+            android:textColor="@color/darkgrey"
+            android:theme="@style/MyFloatEditText" />
+
+        <include
+            android:id="@+id/toolbar_actionbar"
+            layout="@layout/toolbar_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <GridView
+            android:id="@+id/gvproduk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:clickable="true"
+            android:drawSelectorOnTop="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:horizontalSpacing="1dp"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="1dp"
+            android:layout_marginTop="@dimen/dimens_1dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_weight=".30"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginBottom="1dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnadd"
+                style="@style/Button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:text="+ Tambah Pelanggan"
+                android:textAppearance="?android:attr/textAppearanceButton"/>
+
+            <Spinner
+                android:id="@+id/spin1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="*"
+                    android:id="@+id/tbllist">
+                </TableLayout>
+
+                <TableLayout
+                    android:id="@+id/tbltotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/dimens_10dp"
+                    android:stretchColumns="*" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnclear"
+                    style="@style/Button3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:text="Clear Sale"/>
+
+                <TextView
+                    android:id="@+id/txtdesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_50dp"
+                    android:text=""
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/darkgrey"
+                    tools:ignore="TextViewEdits" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnpay"
+                    style="@style/Button2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:text="Bayar Rp22.600"
+                    android:textAppearance="?android:attr/textAppearanceButton"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

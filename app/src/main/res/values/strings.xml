@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">POS Resto</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Resto Montaz</string>
+    <string name="nav_header_subtitle">spi@montaz.id</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_pos">Point of Sale</string>
+    <string name="menu_history">History</string>
+    <string name="menu_inventory">Inventory</string>
+    <string name="menu_setting">Setting</string>
+    <string name="lang_en" translatable="false">English</string>
+    <string name="lang_id" translatable="false">Indonesia</string>
+
+    <string-array name="metode">
+        <item>Dine In</item>
+        <item>Take Away</item>
+        <item>Delivery</item>
+    </string-array>
+</resources>

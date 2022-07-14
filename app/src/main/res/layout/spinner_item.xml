@@ -1,0 +1,17 @@
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/text1"
+    android:text=""
+    style="?android:attr/spinnerItemStyle"
+    android:singleLine="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/dimens_10dp"
+    android:paddingBottom="@dimen/dimens_10dp"
+    android:paddingStart="@dimen/dimens_15dp"
+    android:paddingEnd="@dimen/dimens_15dp"
+    android:ellipsize="marquee"
+    android:textColor="@color/darkgrey"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    tools:ignore="RtlSymmetry" />

@@ -1,0 +1,52 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="dimens_1dp">1.0dip</dimen>
+    <dimen name="dimens_2dp">2.0dip</dimen>
+    <dimen name="dimens_3dp">3.0dip</dimen>
+    <dimen name="dimens_4dp">4.0dip</dimen>
+    <dimen name="dimens_5dp">5.0dip</dimen>
+    <dimen name="dimens_10dp">10.0dip</dimen>
+    <dimen name="dimens_15dp">15.0dip</dimen>
+    <dimen name="dimens_20dp">20.0dip</dimen>
+    <dimen name="dimens_25dp">25.0dip</dimen>
+    <dimen name="dimens_30dp">30.0dip</dimen>
+    <dimen name="dimens_35dp">35.0dip</dimen>
+    <dimen name="dimens_40dp">40.0dip</dimen>
+    <dimen name="dimens_50dp">50.0dip</dimen>
+    <dimen name="dimens_60dp">60.0dip</dimen>
+    <dimen name="dimens_75dp">79.0dip</dimen>
+    <dimen name="dimens_80dp">80.0dip</dimen>
+    <dimen name="dimens_85dp">85.0dip</dimen>
+    <dimen name="dimens_90dp">90.0dip</dimen>
+    <dimen name="dimens_95dp">95.0dip</dimen>
+    <dimen name="dimens_100dp">100.0dip</dimen>
+    <dimen name="dimens_110dp">110.0dip</dimen>
+    <dimen name="dimens_120dp">120.0dip</dimen>
+    <dimen name="dimens_130dp">130.0dip</dimen>
+    <dimen name="dimens_150dp">150.0dip</dimen>
+    <dimen name="dimens_180dp">182.0dip</dimen>
+    <dimen name="dimens_200dp">200.0dip</dimen>
+    <dimen name="dimens_300dp">300.0dip</dimen>
+    <dimen name="dimens_400dp">400.0dip</dimen>
+    <dimen name="text_10sp">10.0sp</dimen>
+    <dimen name="text_11sp">11.0sp</dimen>
+    <dimen name="text_12sp">12.0sp</dimen>
+    <dimen name="text_13sp">13.0sp</dimen>
+    <dimen name="text_14sp">14.0sp</dimen>
+    <dimen name="text_15sp">15.0sp</dimen>
+    <dimen name="text_16sp">16.0sp</dimen>
+    <dimen name="text_18sp">18.0sp</dimen>
+    <dimen name="text_20sp">20.0sp</dimen>
+    <dimen name="text_22sp">22.0sp</dimen>
+    <dimen name="text_23sp">23.0sp</dimen>
+    <dimen name="text_24sp">24.0sp</dimen>
+    <dimen name="text_25sp">25.0sp</dimen>
+    <dimen name="text_30sp">30.0sp</dimen>
+    <dimen name="text_40sp">40.0sp</dimen>
+</resources>

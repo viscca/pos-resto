@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_pos">
+
+    <fragment
+        android:id="@+id/nav_pos"
+        android:name="com.pos.restokasir.ui.fragment.PosFragment"
+        android:label="@string/menu_pos"
+        tools:layout="@layout/fragment_pos" />
+
+    <fragment
+        android:id="@+id/nav_history"
+        android:name="com.pos.restokasir.ui.fragment.HistoryFragment"
+        android:label="@string/menu_history"
+        tools:layout="@layout/fragment_history" />
+
+    <fragment
+        android:id="@+id/nav_inventory"
+        android:name="com.pos.restokasir.ui.fragment.InventoryFragment"
+        android:label="@string/menu_inventory"
+        tools:layout="@layout/fragment_inventory" />
+
+    <fragment
+        android:id="@+id/nav_setting"
+        android:name="com.pos.restokasir.ui.fragment.SettingFragment"
+        android:label="@string/menu_setting"
+        tools:layout="@layout/fragment_setting" />
+</navigation>
