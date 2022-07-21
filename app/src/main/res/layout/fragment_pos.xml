@@ -33,7 +33,7 @@
 
         <include
             android:id="@+id/toolbar_actionbar"
-            layout="@layout/toolbar_default"
+            layout="@layout/toolbar_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -88,20 +88,21 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            tools:ignore="NestedWeights">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TableLayout
+                    android:id="@+id/tbllist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:stretchColumns="*"
-                    android:id="@+id/tbllist">
-                </TableLayout>
+                    android:stretchColumns="*" />
 
                 <TableLayout
                     android:id="@+id/tbltotal"
@@ -115,27 +116,27 @@
                     style="@style/Button3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAllCaps="false"
-                    android:text="Clear Sale"/>
+                    android:text="Clear Sale"
+                    android:textAllCaps="false" />
 
                 <TextView
                     android:id="@+id/txtdesc"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimens_50dp"
-                    android:text=""
                     android:inputType="textMultiLine"
+                    android:text=""
                     android:textColor="@color/darkgrey"
                     tools:ignore="TextViewEdits" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnpay"
-                    style="@style/Button2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAllCaps="false"
-                    android:text="Bayar Rp22.600"
-                    android:textAppearance="?android:attr/textAppearanceButton"/>
             </LinearLayout>
         </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnpay"
+            style="@style/Button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bayar Rp22.600"
+            android:textAllCaps="false"
+            android:textAppearance="?android:attr/textAppearanceButton" />
     </LinearLayout>
 </LinearLayout>

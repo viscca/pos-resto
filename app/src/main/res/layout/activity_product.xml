@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include
+        android:id="@+id/toolbar_actionbar"
+        layout="@layout/toolbar_default"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageViewMenu"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimens_200dp"
+                android:contentDescription="@string/nav_header_desc"
+                android:src="@drawable/produk" />
+
+            <EditText
+                android:id="@+id/eNama"
+                style="@style/MyEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:hint="Nama Produk"
+                android:layout_marginTop="20dp"
+                android:inputType="textVisiblePassword"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:theme="@style/MyFloatEditText">
+
+                <requestFocus />
+            </EditText>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginTop="@dimen/dimens_15dp"
+                android:orientation="vertical">
+
+                <Spinner
+                    android:id="@+id/spinCat"
+                    style="@style/MyEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_40dp"
+                    android:entries="@array/kategori_sementara"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/eHarga"
+                style="@style/MyEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:hint="Harga"
+                android:layout_marginTop="@dimen/dimens_15dp"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:theme="@style/MyFloatEditText" />
+
+            <EditText
+                android:id="@+id/eSKU"
+                style="@style/MyEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:hint="SKU"
+                android:layout_marginTop="@dimen/dimens_15dp"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:theme="@style/MyFloatEditText" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnaddvar"
+                style="@style/Button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tambah Varian"
+                android:layout_marginTop="@dimen/dimens_15dp"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:textAllCaps="false"
+                android:textAppearance="?android:attr/textAppearanceButton" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnsimpan"
+            style="@style/Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Simpan"
+            android:textAppearance="?android:attr/textAppearanceButton" />
+    </LinearLayout>
+</LinearLayout>

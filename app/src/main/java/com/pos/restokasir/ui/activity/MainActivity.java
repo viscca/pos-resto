@@ -1,29 +1,22 @@
 package com.pos.restokasir.ui.activity;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.pos.restokasir.R;
 import com.pos.restokasir.databinding.ActivityMainBinding;
-
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,20 +41,9 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_pos, R.id.nav_history, R.id.nav_inventory, R.id.nav_setting)
                 .setOpenableLayout(drawer)
                 .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        NavController navController = getNavController();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-    }
-
-    @NonNull
-    private NavController getNavController() {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
-        if (!(fragment instanceof NavHostFragment)) {
-            throw new IllegalStateException("Activity " + this
-                    + " does not have a NavHostFragment");
-        }
-        return ((NavHostFragment) fragment).getNavController();
     }
 
     @Override

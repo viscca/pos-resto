@@ -16,7 +16,6 @@
         <activity
             android:name=".ui.activity.SplashActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,18 +24,26 @@
         </activity>
         <activity
             android:name=".ui.activity.MainActivity"
-            android:label="@string/app_name"
             android:clearTaskOnLaunch="true"
             android:launchMode="singleTop"
             android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
         </activity>
         <activity
             android:name=".ui.activity.LoginActivity"
-            android:label="@string/app_name"
             android:clearTaskOnLaunch="true"
             android:launchMode="singleTop"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:windowSoftInputMode="stateVisible"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
+        </activity>
+        <activity android:name=".ui.activity.ProductActivity"
+            android:clearTaskOnLaunch="true"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
+        </activity>
+        <activity android:name=".ui.activity.PayActivity"
+            android:clearTaskOnLaunch="true"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
+        </activity>
+        <activity android:name=".ui.activity.ReceiptActivity"
+            android:clearTaskOnLaunch="true"
             android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
         </activity>
     </application>

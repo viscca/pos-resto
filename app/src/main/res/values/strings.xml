@@ -19,4 +19,10 @@
         <item>Take Away</item>
         <item>Delivery</item>
     </string-array>
+
+    <string-array name="kategori_sementara">
+        <item>- Pilih Kategori -</item>
+        <item>Makanan</item>
+        <item>Minuman</item>
+    </string-array>
 </resources>

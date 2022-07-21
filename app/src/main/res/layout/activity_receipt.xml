@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/ivClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginTop="@dimen/dimens_15dp"
+        android:layout_marginStart="@dimen/dimens_15dp"
+        android:src="@drawable/ic_close"
+        android:contentDescription="@string/nav_header_desc" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/dimens_15dp"
+        android:layout_marginLeft="@dimen/dimens_15dp"
+        android:layout_marginTop="@dimen/dimens_10dp"
+        android:layout_marginEnd="@dimen/dimens_15dp"
+        android:layout_marginRight="@dimen/dimens_15dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="PEMBAYARAN SUKSES"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="?attr/colorPrimary"
+                android:textStyle="bold"
+                android:typeface="sans" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/nav_header_desc"
+                android:src="@drawable/ic_check_circle" />
+
+            <TextView
+                android:id="@+id/txt2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_20dp"
+                android:gravity="center"
+                android:text="TUNAI"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="?attr/colorPrimary"
+                android:textStyle="bold"
+                android:typeface="sans" />
+
+            <TextView
+                android:id="@+id/txt3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_30dp"
+                android:gravity="center"
+                android:text="Bayar Rp22.600"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/darkgrey"
+                android:textStyle="bold"
+                android:typeface="sans" />
+
+            <TextView
+                android:id="@+id/txt4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_20dp"
+                android:gravity="center"
+                android:text="Kembalian Rp7.400"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="@dimen/text_40sp"
+                android:textStyle="bold"
+                android:typeface="sans" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dimens_20dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/eStrukEmail"
+                    style="@style/MyEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autofillHints="emailAddress"
+                    android:hint="Struk Email"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:theme="@style/MyFloatEditText" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSendEmail"
+                    style="@style/Button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kirim"
+                    android:textAllCaps="false"
+                    android:textAppearance="?android:attr/textAppearanceButton" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dimens_20dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/eStrukWA"
+                    style="@style/MyEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autofillHints="phone"
+                    android:hint="Struk WhatsApp"
+                    android:inputType="phone"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:theme="@style/MyFloatEditText" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSendWA"
+                    style="@style/Button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kirim"
+                    android:textAllCaps="false"
+                    android:textAppearance="?android:attr/textAppearanceButton" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btncetak"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_20dp"
+                android:text="Cetak Struk"
+                android:textAppearance="?android:attr/textAppearanceButton" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

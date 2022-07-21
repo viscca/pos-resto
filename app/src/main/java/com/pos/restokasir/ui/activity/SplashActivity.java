@@ -31,7 +31,7 @@ public class SplashActivity extends Activity {
 
     private void initiateUI(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash_activity);
+        setContentView(R.layout.activity_splash);
         Display getOrient = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         getOrient.getSize(size);

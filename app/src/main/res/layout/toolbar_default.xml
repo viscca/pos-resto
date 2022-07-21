@@ -6,25 +6,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    app:titleTextAppearance="?android:attr/textAppearanceSmall"
+    android:background="?attr/colorPrimary"
+    android:minHeight="@dimen/abc_action_bar_default_height_material"
+    app:titleTextAppearance="?android:attr/textAppearanceMedium"
     tools:ignore="PrivateResource">
-
-    <TextView
-        android:id="@+id/toolbar_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:ellipsize="marquee"
-        android:fadingEdge="horizontal"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:paddingEnd="10dp"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/black"
-        tools:ignore="RtlSymmetry" />
 
 </androidx.appcompat.widget.Toolbar>

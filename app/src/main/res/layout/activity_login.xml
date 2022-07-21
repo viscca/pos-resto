@@ -94,7 +94,7 @@
                     android:typeface="sans" />
             </LinearLayout>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnlogin"
                 style="@style/Button"
                 android:layout_width="match_parent"

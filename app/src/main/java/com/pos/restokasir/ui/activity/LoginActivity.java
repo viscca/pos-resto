@@ -17,7 +17,7 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate " + savedInstanceState);
-        setContentView(R.layout.login_activity);
+        setContentView(R.layout.activity_login);
 
         btnOK = findViewById(R.id.btnlogin);
         btnOK.setOnClickListener(DiKlik);
@@ -28,6 +28,7 @@ public class LoginActivity extends Activity {
         public void onClick(View v) {
             if (v==btnOK) {
                 Intent newIntent = new Intent(LoginActivity.this, MainActivity.class);
+                newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(newIntent);
             }
         }

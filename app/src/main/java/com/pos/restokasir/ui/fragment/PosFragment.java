@@ -1,6 +1,7 @@
 package com.pos.restokasir.ui.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.pos.restokasir.R;
 import com.pos.restokasir.adapter.MenuAdapter;
 import com.pos.restokasir.databinding.FragmentPosBinding;
 import com.pos.restokasir.tools.NavigationItem;
+import com.pos.restokasir.ui.activity.PayActivity;
+import com.pos.restokasir.ui.activity.ProductActivity;
 
 import java.util.Objects;
 
@@ -29,7 +32,8 @@ public class PosFragment extends Fragment {
 
     private FragmentPosBinding binding;
     TableLayout tableList, tableTotal;
-    private Button btnadd, btnpay;
+    private Button btnaddcustomer, btnpay;
+    private TextView btnaddproduk;
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,13 +51,13 @@ public class PosFragment extends Fragment {
         GridView gv = root.findViewById(R.id.gvproduk);
         MenuAdapter trxAdapter;
         trxAdapter = new MenuAdapter(inflater.getContext(), R.layout.list_menu);
-        trxAdapter.add(new NavigationItem("Nasi Goreng", getResources().getDrawable(R.drawable.food)));
-        trxAdapter.add(new NavigationItem("Soto", getResources().getDrawable(R.drawable.food)));
-        trxAdapter.add(new NavigationItem("Ayam Goreng", getResources().getDrawable(R.drawable.food)));
-        trxAdapter.add(new NavigationItem("Sate", getResources().getDrawable(R.drawable.food)));
-        trxAdapter.add(new NavigationItem("Pecel Lele", getResources().getDrawable(R.drawable.food)));
-        trxAdapter.add(new NavigationItem("Ayam Geprek", getResources().getDrawable(R.drawable.food)));
-        trxAdapter.add(new NavigationItem("Teh Manis", getResources().getDrawable(R.drawable.food)));
+        trxAdapter.add(new NavigationItem("Nasi Goreng\nRp10.000", getResources().getDrawable(R.drawable.food)));
+        trxAdapter.add(new NavigationItem("Soto\nRp15.000", getResources().getDrawable(R.drawable.food)));
+        trxAdapter.add(new NavigationItem("Ayam Goreng\nRp8.000", getResources().getDrawable(R.drawable.food)));
+        trxAdapter.add(new NavigationItem("Sate\nRp15.000", getResources().getDrawable(R.drawable.food)));
+        trxAdapter.add(new NavigationItem("Pecel Lele\nRp7.000", getResources().getDrawable(R.drawable.food)));
+        trxAdapter.add(new NavigationItem("Ayam Geprek\nRp10.000", getResources().getDrawable(R.drawable.food)));
+        trxAdapter.add(new NavigationItem("Teh Manis\nRp5.000", getResources().getDrawable(R.drawable.food)));
 
         gv.setAdapter(trxAdapter);
 
@@ -67,10 +71,12 @@ public class PosFragment extends Fragment {
         InsertRow();
         InsertTotal();
 
-        Button btnadd = binding.btnadd;
-        btnadd.setOnClickListener(DiKlik);
-        Button btnpay = binding.btnpay;
+        btnaddcustomer = binding.btnadd;
+        btnaddcustomer.setOnClickListener(DiKlik);
+        btnpay = binding.btnpay;
         btnpay.setOnClickListener(DiKlik);
+        btnaddproduk = root.findViewById(R.id.txtaddproduk);
+        btnaddproduk.setOnClickListener(DiKlik);
         return root;
     }
 
@@ -136,10 +142,16 @@ public class PosFragment extends Fragment {
     private final View.OnClickListener DiKlik= new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (v==btnadd) {
+            if (v==btnaddcustomer) {
 
             } else if (v==btnpay) {
-
+                Intent intent = new Intent(getActivity(), PayActivity.class);
+                startActivity(intent);
+                requireActivity().overridePendingTransition(0, 0);
+            } else if (v==btnaddproduk) {
+                Intent intent = new Intent(getActivity(), ProductActivity.class);
+                startActivity(intent);
+                requireActivity().overridePendingTransition(0, 0);
             }
         }
     };
