@@ -32,7 +32,7 @@
         <item name="android:paddingBottom">@dimen/dimens_10dp</item>
     </style>
 
-    <style name="MySpinner">
+    <style name="MyEditText2">
         <item name="android:textSize">@dimen/text_16sp</item>
         <item name="android:background">@color/white</item>
         <item name="android:paddingLeft">@dimen/dimens_15dp</item>
@@ -41,9 +41,13 @@
         <item name="android:paddingBottom">@dimen/dimens_10dp</item>
     </style>
 
-    <style name="MyFloatEditText" parent="Theme.AppCompat.Light">
-        <item name="colorControlNormal">@color/darkgrey</item>
-        <item name="colorControlActivated">?attr/colorSecondaryVariant</item>
+    <style name="MySpinner" parent="android:Widget.DeviceDefault.Spinner">
+        <item name="android:textSize">@dimen/text_16sp</item>
+        <item name="android:background">@drawable/spinner_icon</item>
+        <item name="android:paddingLeft">7dp</item>
+        <item name="android:paddingTop">@dimen/dimens_10dp</item>
+        <item name="android:paddingRight">@dimen/dimens_15dp</item>
+        <item name="android:paddingBottom">@dimen/dimens_10dp</item>
     </style>
 
     <style name="TextKlik">
@@ -75,7 +79,11 @@
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
 
-    <style name="IconKlik">
-        <item name="android:drawableEnd">@drawable/icon_select</item>
+    <style name="EditKlik">
+        <item name="android:drawableEnd">@drawable/edit_select</item>
+    </style>
+
+    <style name="EditOffKlik">
+        <item name="android:drawableEnd">@drawable/edit_off_select</item>
     </style>
 </resources>

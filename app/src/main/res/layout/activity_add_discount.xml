@@ -27,13 +27,6 @@
             android:layout_gravity="center"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageViewMenu"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimens_200dp"
-                android:contentDescription="@string/nav_header_desc"
-                android:src="@drawable/produk" />
-
             <EditText
                 android:id="@+id/eNama"
                 style="@style/MyEditText"
@@ -41,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:autofillHints=""
-                android:hint="Nama Produk"
+                android:hint="Nama Diskon"
                 android:inputType="textVisiblePassword"
                 android:singleLine="true"
                 android:textColor="@color/black">
@@ -54,51 +47,29 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimens_15dp"
                 android:background="@color/white"
-                android:orientation="vertical">
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/eJumlah"
+                    style="@style/MyEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autofillHints=""
+                    android:layout_marginEnd="@dimen/dimens_3dp"
+                    android:hint="Jumlah"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColor="@color/black" />
 
                 <Spinner
-                    android:id="@+id/spinCat"
+                    android:id="@+id/spinDisc"
                     style="@style/MySpinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimens_40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/tipe_discount"
                     android:spinnerMode="dropdown" />
             </LinearLayout>
-
-            <EditText
-                android:id="@+id/eHarga"
-                style="@style/MyEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimens_15dp"
-                android:autofillHints=""
-                android:hint="Harga"
-                android:inputType="number"
-                android:singleLine="true"
-                android:textColor="@color/black" />
-
-            <EditText
-                android:id="@+id/eSKU"
-                style="@style/MyEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimens_15dp"
-                android:autofillHints=""
-                android:hint="SKU"
-                android:inputType="textVisiblePassword"
-                android:singleLine="true"
-                android:textColor="@color/black" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnaddvar"
-                style="@style/Button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimens_15dp"
-                android:drawableEnd="@drawable/ic_arrow_right"
-                android:text="Tambah Varian"
-                android:textAllCaps="false"
-                android:textAppearance="?android:attr/textAppearanceButton" />
-
         </LinearLayout>
     </ScrollView>
 

@@ -4,8 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.fragment.HistoryFragment">
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar_actionbar"
+        layout="@layout/toolbar_default"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <EditText
         android:id="@+id/eCari"
@@ -21,7 +26,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/darkgrey"
         tools:ignore="MissingConstraints" />
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -35,6 +39,5 @@
         android:fadingEdgeLength="10dp"
         android:requiresFadingEdge="vertical"
         android:divider="@color/grey"
-        android:dividerHeight="@dimen/dimens_1dp">
-    </ListView>
+        android:dividerHeight="@dimen/dimens_1dp" />
 </LinearLayout>

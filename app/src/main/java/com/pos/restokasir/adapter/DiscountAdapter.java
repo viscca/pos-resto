@@ -9,18 +9,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pos.restokasir.tools.NavigationItem;
 import com.pos.restokasir.R;
+import com.pos.restokasir.tools.NavigationItem;
 
-public class MenuAdapter extends ArrayAdapter<NavigationItem> {
+public class DiscountAdapter extends ArrayAdapter<NavigationItem> {
     private final int layoutResourceId;
-    private String ItemDipilih;
-    private final boolean dgGmbr;
 
-    public MenuAdapter(Context context, int layoutResourceId) {
+    public DiscountAdapter(Context context, int layoutResourceId) {
         super(context, layoutResourceId);
-        this.dgGmbr=true;
-        this.ItemDipilih="";
         this.layoutResourceId = layoutResourceId;
     }
 
@@ -31,10 +27,10 @@ public class MenuAdapter extends ArrayAdapter<NavigationItem> {
         convertView = inflater.inflate(this.layoutResourceId,parent, false);
 
         NavigationItem menu = getItem(position);
-        TextView ZX = convertView.findViewById(R.id.txtTitle);
-        ZX.setText(menu.getText());
-        if(dgGmbr)
-            ((ImageView)convertView.findViewById(R.id.imgIcon)).setImageDrawable(menu.getDrawable());
+        TextView nama = convertView.findViewById(R.id.txtNama);
+        nama.setText(menu.getText());
+        TextView jumlah = convertView.findViewById(R.id.txtJumlah);
+        jumlah.setText(menu.mJumlah);
 
         return convertView;
     }

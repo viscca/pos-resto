@@ -13,6 +13,7 @@
     <string name="menu_setting">Setting</string>
     <string name="lang_en" translatable="false">English</string>
     <string name="lang_id" translatable="false">Indonesia</string>
+    <string name="diskon">Diskon</string>
 
     <string-array name="metode">
         <item>Dine In</item>
@@ -20,9 +21,8 @@
         <item>Delivery</item>
     </string-array>
 
-    <string-array name="kategori_sementara">
-        <item>- Pilih Kategori -</item>
-        <item>Makanan</item>
-        <item>Minuman</item>
+    <string-array name="tipe_discount">
+        <item>%</item>
+        <item>Rp</item>
     </string-array>
 </resources>

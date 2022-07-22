@@ -3,37 +3,37 @@ package com.pos.restokasir.ui.fragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.pos.restokasir.R;
 import com.pos.restokasir.adapter.MenuAdapter;
 import com.pos.restokasir.databinding.FragmentPosBinding;
 import com.pos.restokasir.tools.NavigationItem;
+import com.pos.restokasir.ui.activity.ListDiscountActivity;
 import com.pos.restokasir.ui.activity.PayActivity;
 import com.pos.restokasir.ui.activity.ProductActivity;
-
-import java.util.Objects;
 
 public class PosFragment extends Fragment {
 
     private FragmentPosBinding binding;
     TableLayout tableList, tableTotal;
-    private Button btnaddcustomer, btnpay;
-    private TextView btnaddproduk;
+    private Button btnaddcustomer, btnpay, btnproduk, btndiskon, btnkategori;
+    private TextView btnedit, btneditoff;
+    public LinearLayout llEdit;
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,12 +41,8 @@ public class PosFragment extends Fragment {
         View root = binding.getRoot();
 
         String Judul = "All Item";
-        Toolbar mToolbar = root.findViewById(R.id.toolbar_actionbar);
         TextView textView = root.findViewById(R.id.toolbar_title);
         textView.setText(Judul);
-        ((AppCompatActivity) requireActivity()).setSupportActionBar(mToolbar);
-        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setDisplayShowHomeEnabled(true);
 
         GridView gv = root.findViewById(R.id.gvproduk);
         MenuAdapter trxAdapter;
@@ -75,8 +71,17 @@ public class PosFragment extends Fragment {
         btnaddcustomer.setOnClickListener(DiKlik);
         btnpay = binding.btnpay;
         btnpay.setOnClickListener(DiKlik);
-        btnaddproduk = root.findViewById(R.id.txtaddproduk);
-        btnaddproduk.setOnClickListener(DiKlik);
+        llEdit = binding.llEdit;
+        btnedit = root.findViewById(R.id.txtedit);
+        btnedit.setOnClickListener(DiKlik);
+        btneditoff = root.findViewById(R.id.txteditoff);
+        btneditoff.setOnClickListener(DiKlik);
+        btnproduk = binding.btnaddproduct;
+        btnproduk.setOnClickListener(DiKlik);
+        btndiskon = binding.btnadddisc;
+        btndiskon.setOnClickListener(DiKlik);
+        btnkategori = binding.btnaddcat;
+        btnkategori.setOnClickListener(DiKlik);
         return root;
     }
 
@@ -84,6 +89,15 @@ public class PosFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        llEdit.setVisibility(View.GONE);
+        btnedit.setVisibility(View.VISIBLE);
+        btneditoff.setVisibility(View.GONE);
+        Log.e("prs_PosFragment","onResume");
     }
 
     @SuppressLint("SetTextI18n")
@@ -148,10 +162,24 @@ public class PosFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), PayActivity.class);
                 startActivity(intent);
                 requireActivity().overridePendingTransition(0, 0);
-            } else if (v==btnaddproduk) {
+            } else if (v==btnedit) {
+                llEdit.setVisibility(View.VISIBLE);
+                btnedit.setVisibility(View.GONE);
+                btneditoff.setVisibility(View.VISIBLE);
+            } else if (v==btneditoff) {
+                llEdit.setVisibility(View.GONE);
+                btnedit.setVisibility(View.VISIBLE);
+                btneditoff.setVisibility(View.GONE);
+            } else if (v==btnproduk) {
                 Intent intent = new Intent(getActivity(), ProductActivity.class);
                 startActivity(intent);
                 requireActivity().overridePendingTransition(0, 0);
+            } else if (v==btndiskon) {
+                Intent intent = new Intent(getActivity(), ListDiscountActivity.class);
+                startActivity(intent);
+                requireActivity().overridePendingTransition(0, 0);
+            } else if (v==btnkategori) {
+
             }
         }
     };

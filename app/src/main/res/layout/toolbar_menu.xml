@@ -28,12 +28,22 @@
         tools:ignore="RtlSymmetry" />
 
     <TextView
-        android:id="@+id/txtaddproduk"
-        style="@style/IconKlik"
+        android:id="@+id/txtedit"
+        style="@style/EditKlik"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginEnd="5dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+        android:id="@+id/txteditoff"
+        style="@style/EditOffKlik"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="5dp"
+        android:visibility="gone"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
 </androidx.appcompat.widget.Toolbar>

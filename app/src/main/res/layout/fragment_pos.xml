@@ -13,7 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_margin="15dp"
-        android:layout_weight=".70"
+        android:layout_weight=".65"
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
@@ -23,24 +23,64 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:autofillHints="username"
+            android:autofillHints=""
             android:drawableEnd="@drawable/ic_search"
             android:hint="Cari"
             android:inputType="textVisiblePassword"
             android:singleLine="true"
-            android:textColor="@color/darkgrey"
-            android:theme="@style/MyFloatEditText" />
+            android:textColor="@color/darkgrey" />
 
         <include
             android:id="@+id/toolbar_actionbar"
             layout="@layout/toolbar_menu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/llEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnaddproduct"
+                style="@style/Button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tambah Produk"
+                android:layout_marginEnd="@dimen/dimens_5dp"
+                android:textAllCaps="false"
+                android:textAppearance="?android:attr/textAppearanceButton" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnadddisc"
+                style="@style/Button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tambah Diskon"
+                android:layout_marginEnd="@dimen/dimens_5dp"
+                android:textAllCaps="false"
+                android:textAppearance="?android:attr/textAppearanceButton" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnaddcat"
+                style="@style/Button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Atur Kategori"
+                android:textAllCaps="false"
+                android:textAppearance="?android:attr/textAppearanceButton" />
+        </LinearLayout>
 
         <GridView
             android:id="@+id/gvproduk"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimens_1dp"
             android:background="@color/white"
             android:clickable="true"
             android:drawSelectorOnTop="true"
@@ -49,8 +89,7 @@
             android:horizontalSpacing="1dp"
             android:numColumns="4"
             android:stretchMode="columnWidth"
-            android:verticalSpacing="1dp"
-            android:layout_marginTop="@dimen/dimens_1dp"/>
+            android:verticalSpacing="1dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -59,25 +98,25 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
-        android:layout_weight=".30"
+        android:layout_weight=".35"
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:layout_marginBottom="1dp"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnadd"
-                style="@style/Button2"
+                style="@style/Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
                 android:text="+ Tambah Pelanggan"
-                android:textAppearance="?android:attr/textAppearanceButton"/>
+                android:textAllCaps="false"
+                android:textAppearance="?android:attr/textAppearanceButton" />
 
             <Spinner
                 android:id="@+id/spin1"
@@ -132,7 +171,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnpay"
-            style="@style/Button2"
+            style="@style/Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bayar Rp22.600"

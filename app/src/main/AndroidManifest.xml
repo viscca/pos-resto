@@ -46,6 +46,18 @@
             android:clearTaskOnLaunch="true"
             android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
         </activity>
+        <activity android:name=".ui.activity.DetailHistoryActivity"
+            android:clearTaskOnLaunch="true"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
+        </activity>
+        <activity android:name=".ui.activity.AddDiscountActivity"
+            android:clearTaskOnLaunch="true"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
+        </activity>
+        <activity android:name=".ui.activity.ListDiscountActivity"
+            android:clearTaskOnLaunch="true"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

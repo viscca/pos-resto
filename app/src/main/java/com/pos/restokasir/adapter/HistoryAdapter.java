@@ -9,18 +9,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pos.restokasir.tools.NavigationItem;
 import com.pos.restokasir.R;
+import com.pos.restokasir.tools.NavigationItem;
 
-public class MenuAdapter extends ArrayAdapter<NavigationItem> {
+public class HistoryAdapter extends ArrayAdapter<NavigationItem> {
     private final int layoutResourceId;
-    private String ItemDipilih;
-    private final boolean dgGmbr;
 
-    public MenuAdapter(Context context, int layoutResourceId) {
+    public HistoryAdapter(Context context, int layoutResourceId) {
         super(context, layoutResourceId);
-        this.dgGmbr=true;
-        this.ItemDipilih="";
         this.layoutResourceId = layoutResourceId;
     }
 
@@ -31,10 +27,13 @@ public class MenuAdapter extends ArrayAdapter<NavigationItem> {
         convertView = inflater.inflate(this.layoutResourceId,parent, false);
 
         NavigationItem menu = getItem(position);
-        TextView ZX = convertView.findViewById(R.id.txtTitle);
-        ZX.setText(menu.getText());
-        if(dgGmbr)
-            ((ImageView)convertView.findViewById(R.id.imgIcon)).setImageDrawable(menu.getDrawable());
+        TextView tgl = convertView.findViewById(R.id.txtTgl);
+        tgl.setText(menu.getText());
+        TextView ket = convertView.findViewById(R.id.txtMenu);
+        ket.setText(menu.mKet);
+        TextView total = convertView.findViewById(R.id.txtTotal);
+        total.setText(menu.mTotal);
+        ((ImageView)convertView.findViewById(R.id.imgIcon)).setImageDrawable(menu.getDrawable());
 
         return convertView;
     }
