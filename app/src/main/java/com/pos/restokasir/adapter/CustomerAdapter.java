@@ -12,10 +12,10 @@ import android.widget.TextView;
 import com.pos.restokasir.R;
 import com.pos.restokasir.tools.NavigationItem;
 
-public class DetailHistoryAdapter extends ArrayAdapter<NavigationItem> {
+public class CustomerAdapter extends ArrayAdapter<NavigationItem> {
     private final int layoutResourceId;
 
-    public DetailHistoryAdapter(Context context, int layoutResourceId) {
+    public CustomerAdapter(Context context, int layoutResourceId) {
         super(context, layoutResourceId);
         this.layoutResourceId = layoutResourceId;
     }
@@ -27,10 +27,12 @@ public class DetailHistoryAdapter extends ArrayAdapter<NavigationItem> {
         convertView = inflater.inflate(this.layoutResourceId,parent, false);
 
         NavigationItem menu = getItem(position);
-        TextView ket = convertView.findViewById(R.id.txtKet);
-        ket.setText(menu.getText());
-        TextView jumlah = convertView.findViewById(R.id.txtJumlah);
-        jumlah.setText(menu.mJumlah);
+        TextView nama = convertView.findViewById(R.id.txtNama);
+        nama.setText(menu.getText());
+        TextView hp = convertView.findViewById(R.id.txtHP);
+        hp.setText(menu.mHP);
+        TextView email = convertView.findViewById(R.id.txtEmail);
+        email.setText(menu.mEmail);
         ((ImageView)convertView.findViewById(R.id.imgIcon)).setImageDrawable(menu.getDrawable());
 
         return convertView;

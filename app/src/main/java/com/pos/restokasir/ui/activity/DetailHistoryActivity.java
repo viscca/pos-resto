@@ -4,18 +4,21 @@ import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ListView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.pos.restokasir.R;
-import com.pos.restokasir.adapter.DetailHistoryAdapter;
-import com.pos.restokasir.tools.NavigationItem;
 
 import java.util.Objects;
 
 public class DetailHistoryActivity extends AppCompatActivity {
+    private TableLayout list;
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
@@ -31,15 +34,39 @@ public class DetailHistoryActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        ListView lv = findViewById(R.id.list);
-        DetailHistoryAdapter histAdapter;
-        histAdapter = new DetailHistoryAdapter(this, R.layout.row_detail_history);
-        histAdapter.add(NavigationItem.dethistItem("Nasi Goreng (Reguler)", getResources().getDrawable(R.drawable.food),  "Rp20.000"));
-        histAdapter.add(NavigationItem.dethistItem("Subtotal", getResources().getDrawable(R.drawable.white),  "Rp20.000"));
-        histAdapter.add(NavigationItem.dethistItem("Total", getResources().getDrawable(R.drawable.white),  "Rp20.000"));
-        histAdapter.add(NavigationItem.dethistItem("Jumlah Bayar", getResources().getDrawable(R.drawable.white),  "Rp50.000"));
-        histAdapter.add(NavigationItem.dethistItem("Kembalian", getResources().getDrawable(R.drawable.white),  "Rp30.000"));
-        lv.setAdapter(histAdapter);
+        list = findViewById(R.id.tbllist);
+        InsertRow();
+    }
+
+    @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
+    private void InsertRow(){
+        TableRow tr = new TableRow(this);
+        View v = getLayoutInflater().inflate(R.layout.row_detail_history, tr, false);
+        View v2 = getLayoutInflater().inflate(R.layout.row_detail_history, tr, false);
+        View v3 = getLayoutInflater().inflate(R.layout.row_detail_history, tr, false);
+        View v4 = getLayoutInflater().inflate(R.layout.row_detail_history, tr, false);
+        View v5 = getLayoutInflater().inflate(R.layout.row_detail_history, tr, false);
+        //want to get childs of row for example TextView, get it like this:
+        ((ImageView)v.findViewById(R.id.imgIcon)).setImageDrawable(getResources().getDrawable(R.drawable.food));
+        ((TextView)v.findViewById(R.id.txtKet)).setText("Nasi Goreng (Reguler)");
+        ((TextView)v.findViewById(R.id.txtJumlah)).setText("Rp20.000");
+        list.addView(v);
+        ((ImageView)v2.findViewById(R.id.imgIcon)).setImageDrawable(getResources().getDrawable(R.drawable.white));
+        ((TextView)v2.findViewById(R.id.txtKet)).setText("Subtotal");
+        ((TextView)v2.findViewById(R.id.txtJumlah)).setText("Rp20.000");
+        list.addView(v2);
+        ((ImageView)v3.findViewById(R.id.imgIcon)).setImageDrawable(getResources().getDrawable(R.drawable.white));
+        ((TextView)v3.findViewById(R.id.txtKet)).setText("Total");
+        ((TextView)v3.findViewById(R.id.txtJumlah)).setText("Rp20.000");
+        list.addView(v3);
+        ((ImageView)v4.findViewById(R.id.imgIcon)).setImageDrawable(getResources().getDrawable(R.drawable.white));
+        ((TextView)v4.findViewById(R.id.txtKet)).setText("Jumlah Bayar");
+        ((TextView)v4.findViewById(R.id.txtJumlah)).setText("Rp50.000");
+        list.addView(v4);
+        ((ImageView)v5.findViewById(R.id.imgIcon)).setImageDrawable(getResources().getDrawable(R.drawable.white));
+        ((TextView)v5.findViewById(R.id.txtKet)).setText("Kembalian");
+        ((TextView)v5.findViewById(R.id.txtJumlah)).setText("Rp30.000");
+        list.addView(v5);
     }
 
     @Override

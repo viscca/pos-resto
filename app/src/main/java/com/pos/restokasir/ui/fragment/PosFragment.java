@@ -23,6 +23,7 @@ import com.pos.restokasir.R;
 import com.pos.restokasir.adapter.MenuAdapter;
 import com.pos.restokasir.databinding.FragmentPosBinding;
 import com.pos.restokasir.tools.NavigationItem;
+import com.pos.restokasir.ui.activity.ListCustomerActivity;
 import com.pos.restokasir.ui.activity.ListDiscountActivity;
 import com.pos.restokasir.ui.activity.PayActivity;
 import com.pos.restokasir.ui.activity.ProductActivity;
@@ -157,7 +158,9 @@ public class PosFragment extends Fragment {
         @Override
         public void onClick(View v) {
             if (v==btnaddcustomer) {
-
+                Intent intent = new Intent(getActivity(), ListCustomerActivity.class);
+                startActivity(intent);
+                requireActivity().overridePendingTransition(0, 0);
             } else if (v==btnpay) {
                 Intent intent = new Intent(getActivity(), PayActivity.class);
                 startActivity(intent);

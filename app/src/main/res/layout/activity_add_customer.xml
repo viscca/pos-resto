@@ -22,7 +22,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:orientation="vertical">
 
             <EditText
@@ -31,8 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:autofillHints=""
-                android:hint="Nama Diskon"
+                android:autofillHints="name"
+                android:hint="Nama"
                 android:inputType="textVisiblePassword"
                 android:singleLine="true"
                 android:textColor="@color/black">
@@ -40,34 +39,70 @@
                 <requestFocus />
             </EditText>
 
+            <EditText
+                android:id="@+id/eHP"
+                style="@style/MyEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_15dp"
+                android:autofillHints="phone"
+                android:hint="Nomor Telepon"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/eEmail"
+                style="@style/MyEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_15dp"
+                android:autofillHints="emailAddress"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/eTgl"
+                style="@style/MyEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_15dp"
+                android:autofillHints=""
+                android:hint="Tanggal Lahir"
+                android:inputType="date"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:singleLine="true"
+                android:textColor="@color/black" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimens_15dp"
                 android:background="@color/white"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/eJumlah"
-                    style="@style/MyEditText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:autofillHints=""
-                    android:layout_marginEnd="@dimen/dimens_3dp"
-                    android:hint="Jumlah"
-                    android:inputType="number"
-                    android:singleLine="true"
-                    android:textColor="@color/black" />
+                android:orientation="vertical">
 
                 <Spinner
-                    android:id="@+id/spinDisc"
+                    android:id="@+id/spinJK"
                     style="@style/MySpinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/tipe_discount"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_40dp"
                     android:spinnerMode="dropdown" />
             </LinearLayout>
+
+            <EditText
+                android:id="@+id/eAlamat"
+                style="@style/MyEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_15dp"
+                android:autofillHints="postalAddress"
+                android:hint="Alamat"
+                android:inputType="textVisiblePassword"
+                android:singleLine="true"
+                android:textColor="@color/black" />
         </LinearLayout>
     </ScrollView>
 

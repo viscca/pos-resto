@@ -23,6 +23,7 @@
         android:layout_marginTop="@dimen/dimens_10dp"
         android:layout_marginEnd="@dimen/dimens_15dp"
         android:layout_marginRight="@dimen/dimens_15dp"
+        android:layout_marginBottom="@dimen/dimens_15dp"
         android:layout_weight="1">
 
         <LinearLayout

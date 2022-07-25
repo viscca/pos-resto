@@ -16,6 +16,7 @@
         <activity
             android:name=".ui.activity.SplashActivity"
             android:exported="true"
+            android:screenOrientation="landscape"
             android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,36 +27,54 @@
             android:name=".ui.activity.MainActivity"
             android:clearTaskOnLaunch="true"
             android:launchMode="singleTop"
+            android:screenOrientation="landscape"
             android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
         </activity>
         <activity
             android:name=".ui.activity.LoginActivity"
             android:clearTaskOnLaunch="true"
             android:launchMode="singleTop"
+            android:screenOrientation="landscape"
             android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
         </activity>
         <activity android:name=".ui.activity.ProductActivity"
             android:clearTaskOnLaunch="true"
+            android:screenOrientation="landscape"
             android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
         </activity>
         <activity android:name=".ui.activity.PayActivity"
             android:clearTaskOnLaunch="true"
+            android:screenOrientation="landscape"
             android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
         </activity>
         <activity android:name=".ui.activity.ReceiptActivity"
             android:clearTaskOnLaunch="true"
+            android:screenOrientation="landscape"
             android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
         </activity>
         <activity android:name=".ui.activity.DetailHistoryActivity"
             android:clearTaskOnLaunch="true"
+            android:screenOrientation="landscape"
             android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
         </activity>
         <activity android:name=".ui.activity.AddDiscountActivity"
             android:clearTaskOnLaunch="true"
+            android:screenOrientation="landscape"
             android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
         </activity>
         <activity android:name=".ui.activity.ListDiscountActivity"
             android:clearTaskOnLaunch="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
+        </activity>
+        <activity android:name=".ui.activity.ListCustomerActivity"
+            android:clearTaskOnLaunch="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
+        </activity>
+        <activity android:name=".ui.activity.AddCustomerActivity"
+            android:clearTaskOnLaunch="true"
+            android:screenOrientation="landscape"
             android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
         </activity>
     </application>

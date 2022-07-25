@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable;
 public class NavigationItem {
     private String mText;
     private Drawable mDrawable;
-    public String mKet, mTotal, mJumlah;
+    public String mKet, mTotal, mJumlah, mHP, mEmail;
 
     public NavigationItem(String text, Drawable drawable) {
         mText = text;
@@ -19,15 +19,16 @@ public class NavigationItem {
         return x;
     }
 
-    public static NavigationItem dethistItem(String text, Drawable drawable, String jumlah) {
-        NavigationItem x=new NavigationItem(text, drawable);
+    public static NavigationItem discitem(String text, String jumlah) {
+        NavigationItem x=new NavigationItem(text, null);
         x.mJumlah=jumlah;
         return x;
     }
 
-    public static NavigationItem discitem(String text, String jumlah) {
-        NavigationItem x=new NavigationItem(text, null);
-        x.mJumlah=jumlah;
+    public static NavigationItem cusitem(String text, Drawable drawable, String hp, String email) {
+        NavigationItem x=new NavigationItem(text, drawable);
+        x.mHP=hp;
+        x.mEmail=email;
         return x;
     }
 
