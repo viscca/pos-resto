@@ -3,6 +3,7 @@ package com.pos.restokasir.db_sqlite;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -14,8 +15,11 @@ public class C_DB_Setting extends SQLiteOpenHelper {
     public static final String TOKEN_COLUMN_ID = "Kunci";
     public static final String TOKEN_COLUMN_NAME = "isi";
 
+    public SharedPreferences mSettings;
+
     public C_DB_Setting(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        mSettings = context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
     }
 
     @Override
@@ -79,5 +83,9 @@ public class C_DB_Setting extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return token;
+    }
+
+    public SharedPreferences.Editor EditorPref(){
+        return mSettings.edit();
     }
 }

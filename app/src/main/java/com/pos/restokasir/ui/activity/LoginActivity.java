@@ -2,6 +2,7 @@ package com.pos.restokasir.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 
 import com.pos.restokasir.R;
 import com.pos.restokasir.Service.ReqApiServices;
+import com.pos.restokasir.Service.TerimaResponApi;
 import com.pos.restokasir.db_sqlite.C_DB_Setting;
 
 import org.json.JSONException;
@@ -26,7 +28,7 @@ public class LoginActivity extends Activity {
     private final String TAG="Prs_LoginActivity";
     Button btnOK;
     EditText eUserID, ePassword;
-    C_DB_Setting DB_Setting = new C_DB_Setting(this);
+    private C_DB_Setting DB_Setting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,57 +41,49 @@ public class LoginActivity extends Activity {
 
         btnOK = findViewById(R.id.btnlogin);
         btnOK.setOnClickListener(DiKlik);
+
+        DB_Setting = new C_DB_Setting(this);
     }
 
-    private final Callback Jwban1 = new Callback() {
+    private final TerimaResponApi Jwban1 = new TerimaResponApi() {
         @Override
-        public void onFailure(Call call, IOException e) {
-
+        public void OnSukses(JSONObject Data) {
+            try {
+                if(Data.getString("code").equals("00")){
+                    final JSONObject User= Data.getJSONObject("message").getJSONObject("user");
+                    DB_Setting.add("HashUser",User.getString("user_key"));
+                    SharedPreferences.Editor Ubah = DB_Setting.EditorPref();
+                    Ubah.putString("fullName", User.getString("full_name"));
+                    Ubah.apply();
+                    //---------------
+                    Intent newIntent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(newIntent);
+                }
+                return;
+            } catch (JSONException e) {}
         }
 
         @Override
-        public void onResponse(Call call, Response response) throws IOException {
-            try {
-                if (response.isSuccessful()) {
-                    String responseString = response.body().string();
-                    OlahRespon(responseString);
-                } else {
-                    Log.d(TAG, "Error "+ response);
-                }
-            } catch (IOException e) {
-                Log.d(TAG, "Exception caught : ", e);
-            }
+        public void onGagal(IOException e) {
+
         }
     };
-
-    private void  OlahRespon(String Respon){
-        JSONObject js;
-        Log.d(TAG, "Respon: "+ Respon);
-        try {
-            js = new JSONObject(Respon);
-            if(js.getString("code").equals("00")){
-                String x= js.getJSONObject("message").getJSONObject("user").getString("user_key");
-                DB_Setting.add("HashUser",x);
-
-                Intent newIntent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(newIntent);
-            }
-        } catch (JSONException e) {
-            return;
-        }
-    }
 
     private final View.OnClickListener DiKlik= new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (v==btnOK) {
+                SharedPreferences.Editor Ubah = DB_Setting.EditorPref();
+                Ubah.putString("idUser", eUserID.getText().toString());
+                Ubah.apply();
+                //----
                 ReqApiServices X =  new ReqApiServices();
                 X.EventWhenRespon=Jwban1;
                 X.SetAwal();
                 X.urlBuilder.addPathSegments("login/request");
                 X.SetAwalRequest();
                 X.request.post(new FormBody.Builder()
-                        .add("email", eUserID.getText().toString())
+                        .add("email", DB_Setting.mSettings.getString("idUser",""))
                         .add("password", ePassword.getText().toString())
                         .build());
                 //kasir@test.com

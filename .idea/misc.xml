@@ -3,6 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/activity_product.xml" value="0.358695652173913" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/activity_splash.xml" value="0.18802083333333333" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/app_bar_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/content_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/fragment_pos.xml" value="0.18802083333333333" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/nav_header_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/row_list.xml" value="0.358695652173913" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/toolbar_menu.xml" value="0.18802083333333333" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/menu/main.xml" value="0.18802083333333333" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/drawable/ic_add.xml" value="0.196" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/drawable/ic_launcher_background.xml" value="0.196" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.196" />

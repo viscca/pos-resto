@@ -1,6 +1,14 @@
 package com.pos.restokasir.Service;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
+
+import com.pos.restokasir.ui.activity.MainActivity;
+import com.pos.restokasir.ui.activity.SplashActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import okhttp3.*;
@@ -14,7 +22,7 @@ public class ReqApiServices {
     private OkHttpClient client = new OkHttpClient();
     public HttpUrl.Builder urlBuilder;
     public Request.Builder request;
-    public Callback EventWhenRespon;
+    public TerimaResponApi EventWhenRespon;
 
     public void SetAwal(){
         urlBuilder = HttpUrl.parse(MainURL).newBuilder();
@@ -44,6 +52,37 @@ public class ReqApiServices {
     }
 
     public void HitNoWait() {
-        client.newCall(request.build()).enqueue(EventWhenRespon);
+        client.newCall(request.build()).enqueue(Jwban1);
     }
+
+    private final Callback Jwban1 = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            if (EventWhenRespon!=null) EventWhenRespon.onGagal(e);
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            try {
+                Log.d(TAG, "Respon: "+ response);
+                if (response.isSuccessful()) {
+                    String responseString = response.body().string();
+                    Log.d(TAG, "Respon: "+ responseString);
+                    OlahRespon(responseString);
+                } else {
+                    Log.d(TAG, "Error "+ response);
+                }
+            } catch (IOException e) {
+                Log.d(TAG, "Exception caught : ", e);
+            }
+        }
+    };
+
+    private void  OlahRespon(String Respon){
+        JSONObject js;
+        try {
+            js = new JSONObject(Respon);
+            if (EventWhenRespon!=null) EventWhenRespon.OnSukses(js);
+        } catch (JSONException e) {}
+     }
 }

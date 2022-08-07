@@ -2,52 +2,91 @@ package com.pos.restokasir.ui.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.pos.restokasir.R;
+import com.pos.restokasir.Service.ReqApiServices;
+import com.pos.restokasir.Service.TerimaResponApi;
 import com.pos.restokasir.adapter.MenuAdapter;
 import com.pos.restokasir.databinding.FragmentPosBinding;
+import com.pos.restokasir.db_sqlite.C_DB_Setting;
 import com.pos.restokasir.tools.NavigationItem;
 import com.pos.restokasir.ui.activity.ListCustomerActivity;
 import com.pos.restokasir.ui.activity.ListDiscountActivity;
+import com.pos.restokasir.ui.activity.MainActivity;
 import com.pos.restokasir.ui.activity.PayActivity;
 import com.pos.restokasir.ui.activity.ProductActivity;
+import com.pos.restokasir.ui.activity.SplashActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.Response;
 
 public class PosFragment extends Fragment {
-
+    private final String TAG="Prs_FragmentPOS";
+    private LayoutInflater inflater;
     private FragmentPosBinding binding;
-    TableLayout tableList, tableTotal;
+    private TableLayout tableList, tableTotal;
     private Button btnaddcustomer, btnpay, btnproduk, btndiskon, btnkategori;
     private TextView btnedit, btneditoff;
-    public LinearLayout llEdit;
+    private LinearLayout llEdit;
+    private EditText eCari;
+    private MainActivity UtamaForm;
+
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        this.inflater = inflater;
         binding = FragmentPosBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        UtamaForm= (MainActivity) getActivity();
         View root = binding.getRoot();
+        eCari = binding.eCari;
+        eCari.setOnKeyListener(TentangTombol);
 
-        String Judul = "All Item";
         TextView textView = root.findViewById(R.id.toolbar_title);
-        textView.setText(Judul);
+        textView.setText("All Item");
 
-        GridView gv = root.findViewById(R.id.gvproduk);
-        MenuAdapter trxAdapter;
-        trxAdapter = new MenuAdapter(inflater.getContext(), R.layout.list_menu);
+        GridView gv = binding.gvproduk;
+        MenuAdapter trxAdapter= new MenuAdapter(inflater.getContext(), R.layout.list_menu);
+        trxAdapter.clear();
         trxAdapter.add(new NavigationItem("Nasi Goreng\nRp10.000", getResources().getDrawable(R.drawable.food)));
         trxAdapter.add(new NavigationItem("Soto\nRp15.000", getResources().getDrawable(R.drawable.food)));
         trxAdapter.add(new NavigationItem("Ayam Goreng\nRp8.000", getResources().getDrawable(R.drawable.food)));
@@ -83,13 +122,6 @@ public class PosFragment extends Fragment {
         btndiskon.setOnClickListener(DiKlik);
         btnkategori = binding.btnaddcat;
         btnkategori.setOnClickListener(DiKlik);
-        return root;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 
     @Override
@@ -186,4 +218,56 @@ public class PosFragment extends Fragment {
             }
         }
     };
+
+    private final View.OnKeyListener TentangTombol =new View.OnKeyListener() {
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            if(v == eCari){
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    Cari_Produk();
+                    return true;
+                }
+            }
+            return false;
+        }
+    };
+
+    private void Cari_Produk(){
+        ReqApiServices X =  new ReqApiServices();
+        X.EventWhenRespon=Jwban1;
+        X.SetAwal();
+        X.urlBuilder.addPathSegments("product/list");
+        X.SetAwalRequest();
+        X.request.header("Apphash", UtamaForm.DB_Setting.get_Key("HashUser"));
+        X.request.post(new FormBody.Builder()
+                .add("name", eCari.getText().toString())
+                .add("code","")
+                .add("description","")
+                .add("category_id","")
+                .add("page","1")
+                .add("showprice", "GoSend")
+                .build());
+        //kasir@test.com
+        X.HitNoWait();
+    }
+
+    private final TerimaResponApi Jwban1 = new TerimaResponApi() {
+        @Override
+        public void OnSukses(JSONObject Data) {
+            try {
+                if(Data.getString("code").equals("00")){
+                    final JSONArray Prd= Data.getJSONObject("message").getJSONArray("data");
+                    Log.d(TAG, Data.toString());
+                }
+                return;
+            } catch (JSONException e) {}
+        }
+
+        @Override
+        public void onGagal(IOException e) {
+
+        }
+    };
+
 }
