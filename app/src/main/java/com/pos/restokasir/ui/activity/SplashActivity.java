@@ -90,7 +90,7 @@ public class SplashActivity extends Activity {
 
     private final TerimaResponApi Jwban1 = new TerimaResponApi() {
         @Override
-        public void OnSukses(JSONObject Data) {
+        public void OnSukses(ReqApiServices tool, JSONObject Data) {
             try {
                 if(Data.getString("code").equals("00")){
                     final JSONObject User= Data.getJSONObject("message").getJSONObject("user");
@@ -108,7 +108,7 @@ public class SplashActivity extends Activity {
         }
 
         @Override
-        public void onGagal(IOException e) {
+        public void onGagal(ReqApiServices tool, IOException e) {
 
         }
     };

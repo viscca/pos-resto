@@ -34,9 +34,9 @@ public class ListDiscountActivity extends AppCompatActivity {
         ListView lv = findViewById(R.id.list);
         DiscountAdapter discAdapter;
         discAdapter = new DiscountAdapter(this, R.layout.row_discount);
-        discAdapter.add(NavigationItem.discitem("Kamis Manis",  "5%"));
-        discAdapter.add(NavigationItem.discitem("Jumat Berkah",  "15%"));
-        discAdapter.add(NavigationItem.discitem("Juli Nguli",  "Rp2.000"));
+        discAdapter.add(NavigationItem.discitem("Kamis Manis",  "5%", null));
+        discAdapter.add(NavigationItem.discitem("Jumat Berkah",  "15%", null));
+        discAdapter.add(NavigationItem.discitem("Juli Nguli",  "Rp2.000", null));
         lv.setAdapter(discAdapter);
     }
 

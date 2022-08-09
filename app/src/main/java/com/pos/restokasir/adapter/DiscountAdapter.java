@@ -28,9 +28,9 @@ public class DiscountAdapter extends ArrayAdapter<NavigationItem> {
 
         NavigationItem menu = getItem(position);
         TextView nama = convertView.findViewById(R.id.txtNama);
-        nama.setText(menu.getText());
-        TextView jumlah = convertView.findViewById(R.id.txtJumlah);
-        jumlah.setText(menu.mJumlah);
+        nama.setText(menu.getKey("nama"));
+        nama = convertView.findViewById(R.id.txtJumlah);
+        nama.setText(menu.getKey("Jumlah"));
 
         return convertView;
     }

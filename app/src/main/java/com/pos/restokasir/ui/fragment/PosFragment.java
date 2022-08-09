@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,6 +47,7 @@ import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class PosFragment extends Fragment {
@@ -57,8 +59,8 @@ public class PosFragment extends Fragment {
     private TextView btnedit, btneditoff;
     private LinearLayout llEdit;
     private EditText eCari;
-    private MainActivity UtamaForm;
-
+    private GridView gvMenu;
+    private Spinner spinner;
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,7 +78,6 @@ public class PosFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        UtamaForm= (MainActivity) getActivity();
         View root = binding.getRoot();
         eCari = binding.eCari;
         eCari.setOnKeyListener(TentangTombol);
@@ -84,20 +85,10 @@ public class PosFragment extends Fragment {
         TextView textView = root.findViewById(R.id.toolbar_title);
         textView.setText("All Item");
 
-        GridView gv = binding.gvproduk;
-        MenuAdapter trxAdapter= new MenuAdapter(inflater.getContext(), R.layout.list_menu);
-        trxAdapter.clear();
-        trxAdapter.add(new NavigationItem("Nasi Goreng\nRp10.000", getResources().getDrawable(R.drawable.food)));
-        trxAdapter.add(new NavigationItem("Soto\nRp15.000", getResources().getDrawable(R.drawable.food)));
-        trxAdapter.add(new NavigationItem("Ayam Goreng\nRp8.000", getResources().getDrawable(R.drawable.food)));
-        trxAdapter.add(new NavigationItem("Sate\nRp15.000", getResources().getDrawable(R.drawable.food)));
-        trxAdapter.add(new NavigationItem("Pecel Lele\nRp7.000", getResources().getDrawable(R.drawable.food)));
-        trxAdapter.add(new NavigationItem("Ayam Geprek\nRp10.000", getResources().getDrawable(R.drawable.food)));
-        trxAdapter.add(new NavigationItem("Teh Manis\nRp5.000", getResources().getDrawable(R.drawable.food)));
+        gvMenu = binding.gvproduk;
+        gvMenu.setOnItemClickListener(MenuDipilih);
 
-        gv.setAdapter(trxAdapter);
-
-        final Spinner spinner = binding.spin1;
+        spinner = binding.spin1;
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.metode, R.layout.spinner_item);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -130,6 +121,7 @@ public class PosFragment extends Fragment {
         llEdit.setVisibility(View.GONE);
         btnedit.setVisibility(View.VISIBLE);
         btneditoff.setVisibility(View.GONE);
+        Cari_Produk();
         Log.e("prs_PosFragment","onResume");
     }
 
@@ -239,35 +231,58 @@ public class PosFragment extends Fragment {
         X.SetAwal();
         X.urlBuilder.addPathSegments("product/list");
         X.SetAwalRequest();
-        X.request.header("Apphash", UtamaForm.DB_Setting.get_Key("HashUser"));
-        X.request.post(new FormBody.Builder()
+        X.request.header("Apphash", MainActivity.ObjIni.DB_Setting.get_Key("HashUser"));
+        RequestBody Body = new FormBody.Builder()
                 .add("name", eCari.getText().toString())
                 .add("code","")
                 .add("description","")
                 .add("category_id","")
                 .add("page","1")
-                .add("showprice", "GoSend")
-                .build());
-        //kasir@test.com
+                .add("showprice",spinner.getSelectedItem().toString())
+                .build();
+        X.request.post(Body);
         X.HitNoWait();
     }
 
     private final TerimaResponApi Jwban1 = new TerimaResponApi() {
         @Override
-        public void OnSukses(JSONObject Data) {
+        public void OnSukses(ReqApiServices tool, JSONObject Data) {
             try {
                 if(Data.getString("code").equals("00")){
                     final JSONArray Prd= Data.getJSONObject("message").getJSONArray("data");
-                    Log.d(TAG, Data.toString());
+                    MenuAdapter trxAdapter= new MenuAdapter(inflater.getContext(), R.layout.list_menu);
+                    for (int i=0; i < Prd.length(); i++) {
+                        final NavigationItem Isi = NavigationItem.BuatItem(Prd.getJSONObject(i),
+                                getResources().getDrawable(R.drawable.food)
+                        );
+                        Isi.Data.put("JnsHrg",spinner.getSelectedItemPosition());
+                        trxAdapter.add(Isi);
+                    }
+                    Runnable UpdateUI=new Runnable() {
+                        @Override
+                        public void run() {
+                            gvMenu.setAdapter(trxAdapter);
+                        }
+                    };
+                    MainActivity.ObjIni.runOnUiThread(UpdateUI);
                 }
                 return;
             } catch (JSONException e) {}
         }
 
         @Override
-        public void onGagal(IOException e) {
+        public void onGagal(ReqApiServices tool, IOException e) {
 
         }
     };
 
+    private AdapterView.OnItemClickListener MenuDipilih= new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if(view.getParent()==gvMenu){
+                NavigationItem item = (NavigationItem) parent.getAdapter().getItem(position);
+                Log.d(TAG, item.getKey("code"));
+            }
+        }
+    };
 }

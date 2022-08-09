@@ -22,14 +22,15 @@ import com.pos.restokasir.databinding.ActivityMainBinding;
 import com.pos.restokasir.db_sqlite.C_DB_Setting;
 
 public class MainActivity extends AppCompatActivity {
-
+    public static MainActivity ObjIni;
     private AppBarConfiguration mAppBarConfiguration;
     public C_DB_Setting DB_Setting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DB_Setting=new C_DB_Setting(this);
+        ObjIni = this;
+        DB_Setting=new C_DB_Setting(ObjIni);
 
         com.pos.restokasir.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

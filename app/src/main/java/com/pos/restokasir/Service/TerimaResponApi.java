@@ -4,6 +4,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 public interface TerimaResponApi {
-    void OnSukses(JSONObject Data);
-    void onGagal(IOException e);
+    void OnSukses(ReqApiServices tool, JSONObject Data);
+    void onGagal(ReqApiServices tool, IOException e);
 }

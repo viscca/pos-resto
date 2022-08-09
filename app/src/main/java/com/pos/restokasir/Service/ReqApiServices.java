@@ -1,11 +1,6 @@
 package com.pos.restokasir.Service;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
-
-import com.pos.restokasir.ui.activity.MainActivity;
-import com.pos.restokasir.ui.activity.SplashActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,6 +10,7 @@ import okhttp3.*;
 
 public class ReqApiServices {
     private final String TAG="Prs_Api";
+    private final ReqApiServices AlatIni=this;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     public static final MediaType FORM = MediaType.parse("application/x-www-form-urlencoded");
     public final String MainURL="https://resto.montaz.id/apps/v1";
@@ -58,7 +54,7 @@ public class ReqApiServices {
     private final Callback Jwban1 = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
-            if (EventWhenRespon!=null) EventWhenRespon.onGagal(e);
+            if (EventWhenRespon!=null) EventWhenRespon.onGagal(AlatIni, e);
         }
 
         @Override
@@ -82,7 +78,9 @@ public class ReqApiServices {
         JSONObject js;
         try {
             js = new JSONObject(Respon);
-            if (EventWhenRespon!=null) EventWhenRespon.OnSukses(js);
+            if (EventWhenRespon!=null) EventWhenRespon.OnSukses(AlatIni,js);
         } catch (JSONException e) {}
-     }
+    }
+
+
 }
