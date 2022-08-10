@@ -43,6 +43,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -61,6 +62,7 @@ public class PosFragment extends Fragment {
     private EditText eCari;
     private GridView gvMenu;
     private Spinner spinner;
+    private SharedPreferences mSettings;
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -95,8 +97,6 @@ public class PosFragment extends Fragment {
 
         tableList = binding.tbllist;
         tableTotal = binding.tbltotal;
-        InsertRow();
-        InsertTotal();
 
         btnaddcustomer = binding.btnadd;
         btnaddcustomer.setOnClickListener(DiKlik);
@@ -121,61 +121,103 @@ public class PosFragment extends Fragment {
         llEdit.setVisibility(View.GONE);
         btnedit.setVisibility(View.VISIBLE);
         btneditoff.setVisibility(View.GONE);
+        SetNoTrxID();
+        LoadChart();
         Cari_Produk();
-        Log.e("prs_PosFragment","onResume");
     }
 
-    @SuppressLint("SetTextI18n")
-    private void InsertRow(){
-        TableRow tr = new TableRow(getActivity());
-        View v = getLayoutInflater().inflate(R.layout.row_list, tr, false);
-        //want to get childs of row for example TextView, get it like this:
-        ((TextView)v.findViewById(R.id.col1)).setText("Item1");
-        ((TextView)v.findViewById(R.id.col2)).setText("x2");
-        ((TextView)v.findViewById(R.id.col3)).setText("Rp10.000");
-        tableList.addView(v);
+    private void SetNoTrxID(){
+        mSettings= MainActivity.ObjIni.DB_Setting.mSettings;
+        final String Key= "NoTrx";
+        if(mSettings.getInt(Key,0)==0){
+            SharedPreferences.Editor Ubah = mSettings.edit();
+            Integer I= 1000;
+            I= (int) (Math.random() * I + 1);
+            Ubah.putInt(Key, I);
+            Ubah.apply();
+            Log.d(TAG, Key+": "+I);
+        }
     }
 
-    @SuppressLint("SetTextI18n")
-    private void InsertTotal(){
+    private void InsertRow(JSONArray dt){
+        Log.d(TAG,"DataCart "+dt.toString());
+        tableList.removeAllViews();
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        Integer Hrg;
+        try {
+            for (int i=0; i < dt.length(); i++) {
+                TableRow tr = new TableRow(getActivity());
+                View v = getLayoutInflater().inflate(R.layout.row_list, tr, false);
+                final JSONObject Isi = dt.getJSONObject(i);
+                ((TextView)v.findViewById(R.id.col1)).setText("Item1");
+                Hrg= Isi.getInt("qty");
+                ((TextView)v.findViewById(R.id.col2)).setText("x"+Hrg);
+                Hrg= Isi.getInt("total");
+                ((TextView)v.findViewById(R.id.col3)).setText("Rp"+formatter.format(Hrg));
+                tableList.addView(v);
+            }
+        } catch (JSONException e) {}
+    }
+
+    private void InsertTotal(JSONObject dt){
+        tableTotal.removeAllViews();
         TableRow tr = new TableRow(getActivity());
         View v = getLayoutInflater().inflate(R.layout.row_list, tr, false);
-        View v2 = getLayoutInflater().inflate(R.layout.row_list, tr, false);
-        View v3 = getLayoutInflater().inflate(R.layout.row_list, tr, false);
-        View v4 = getLayoutInflater().inflate(R.layout.row_list, tr, false);
-        //want to get childs of row for example TextView, get it like this:
-        ((TextView)v.findViewById(R.id.col1)).setText("Sub Total");
-        ((TextView)v.findViewById(R.id.col1)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
-        ((TextView)v.findViewById(R.id.col1)).setTextColor(getResources().getColor(R.color.darkgrey));
-        ((TextView)v.findViewById(R.id.col2)).setText("");
-        ((TextView)v.findViewById(R.id.col3)).setText("Rp20.000");
-        ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
-        ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.darkgrey));
-        tableTotal.addView(v);
-        ((TextView)v2.findViewById(R.id.col1)).setText("Tip (3%)");
-        ((TextView)v2.findViewById(R.id.col1)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Small);
-        ((TextView)v2.findViewById(R.id.col1)).setTextColor(getResources().getColor(R.color.grey_200));
-        ((TextView)v2.findViewById(R.id.col2)).setText("");
-        ((TextView)v2.findViewById(R.id.col3)).setText("Rp600");
-        ((TextView)v2.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Small);
-        ((TextView)v2.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.grey_200));
-        tableTotal.addView(v2);
-        ((TextView)v3.findViewById(R.id.col1)).setText("PPN (10%)");
-        ((TextView)v3.findViewById(R.id.col1)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Small);
-        ((TextView)v3.findViewById(R.id.col1)).setTextColor(getResources().getColor(R.color.grey_200));
-        ((TextView)v3.findViewById(R.id.col2)).setText("");
-        ((TextView)v3.findViewById(R.id.col3)).setText("Rp2.000");
-        ((TextView)v3.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Small);
-        ((TextView)v3.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.grey_200));
-        tableTotal.addView(v3);
-        ((TextView)v4.findViewById(R.id.col1)).setText("Total");
-        ((TextView)v4.findViewById(R.id.col1)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
-        ((TextView)v4.findViewById(R.id.col1)).setTextColor(getResources().getColor(R.color.darkgrey));
-        ((TextView)v4.findViewById(R.id.col2)).setText("");
-        ((TextView)v4.findViewById(R.id.col3)).setText("Rp22.600");
-        ((TextView)v4.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
-        ((TextView)v4.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.darkgrey));
-        tableTotal.addView(v4);
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        Integer Hrg;
+        try {
+            ((TextView)v.findViewById(R.id.col1)).setText("Sub Total");
+            ((TextView)v.findViewById(R.id.col1)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
+            ((TextView)v.findViewById(R.id.col1)).setTextColor(getResources().getColor(R.color.darkgrey));
+            ((TextView)v.findViewById(R.id.col2)).setText("");
+            Hrg= dt.getInt("totalsubtotal");
+            ((TextView)v.findViewById(R.id.col3)).setText("Rp."+formatter.format(Hrg));
+            ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
+            ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.darkgrey));
+            tableTotal.addView(v);
+        } catch (JSONException e) {}
+
+        tr = new TableRow(getActivity());
+        v = getLayoutInflater().inflate(R.layout.row_list, tr, false);
+        try {
+            ((TextView)v.findViewById(R.id.col1)).setText("Total Disc");
+            ((TextView)v.findViewById(R.id.col1)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Small);
+            ((TextView)v.findViewById(R.id.col1)).setTextColor(getResources().getColor(R.color.grey_200));
+            ((TextView)v.findViewById(R.id.col2)).setText("");
+            Hrg= dt.getInt("totaldisc");
+            ((TextView)v.findViewById(R.id.col3)).setText("Rp."+formatter.format(Hrg));
+            ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Small);
+            ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.grey_200));
+            tableTotal.addView(v);
+        } catch (JSONException e) {}
+
+        tr = new TableRow(getActivity());
+        v = getLayoutInflater().inflate(R.layout.row_list, tr, false);
+        try {
+            ((TextView)v.findViewById(R.id.col1)).setText("Pajak");
+            ((TextView)v.findViewById(R.id.col1)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Small);
+            ((TextView)v.findViewById(R.id.col1)).setTextColor(getResources().getColor(R.color.grey_200));
+            ((TextView)v.findViewById(R.id.col2)).setText("");
+            Hrg= dt.getInt("totaltax");
+            ((TextView)v.findViewById(R.id.col3)).setText("Rp."+formatter.format(Hrg));
+            ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Small);
+            ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.grey_200));
+            tableTotal.addView(v);
+        } catch (JSONException e) {}
+
+        tr = new TableRow(getActivity());
+        v = getLayoutInflater().inflate(R.layout.row_list, tr, false);
+        try {
+            ((TextView)v.findViewById(R.id.col1)).setText("Total");
+            ((TextView)v.findViewById(R.id.col1)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
+            ((TextView)v.findViewById(R.id.col1)).setTextColor(getResources().getColor(R.color.darkgrey));
+            ((TextView)v.findViewById(R.id.col2)).setText("");
+            Hrg= dt.getInt("total");
+            ((TextView)v.findViewById(R.id.col3)).setText("Rp."+formatter.format(Hrg));
+            ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
+            ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.darkgrey));
+            tableTotal.addView(v);
+        } catch (JSONException e) {}
     }
 
     private final View.OnClickListener DiKlik= new View.OnClickListener() {
@@ -238,10 +280,17 @@ public class PosFragment extends Fragment {
                 .add("description","")
                 .add("category_id","")
                 .add("page","1")
-                .add("showprice",spinner.getSelectedItem().toString())
+                .add("showprice",KodePriceTipe())
                 .build();
         X.request.post(Body);
         X.HitNoWait();
+    }
+
+    private String KodePriceTipe(){
+        final String[] Kd = {"dine_in","take_away","GoSend","Grab"};
+        final Integer Pilih= spinner.getSelectedItemPosition();
+        if(Kd.length<=Pilih) return "";
+        return Kd[Pilih];
     }
 
     private final TerimaResponApi Jwban1 = new TerimaResponApi() {
@@ -266,7 +315,6 @@ public class PosFragment extends Fragment {
                     };
                     MainActivity.ObjIni.runOnUiThread(UpdateUI);
                 }
-                return;
             } catch (JSONException e) {}
         }
 
@@ -281,8 +329,65 @@ public class PosFragment extends Fragment {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             if(view.getParent()==gvMenu){
                 NavigationItem item = (NavigationItem) parent.getAdapter().getItem(position);
-                Log.d(TAG, item.getKey("code"));
+                ReqApiServices X =  new ReqApiServices();
+                X.EventWhenRespon=Jwban2;
+                X.SetAwal();
+                X.urlBuilder.addPathSegments("cart/add");
+                X.SetAwalRequest();
+                X.request.header("Apphash", MainActivity.ObjIni.DB_Setting.get_Key("HashUser"));
+                RequestBody Body = new FormBody.Builder()
+                        .add("trxid",""+mSettings.getInt("NoTrx",0))
+                        .add("modifier_id","1,2")
+                        .add("note","")
+                        .add("product_id",item.getKey("code"))
+                        .add("pricetype",KodePriceTipe())
+                        .add("qty","1")
+                        .build();
+                X.request.post(Body);
+                X.HitNoWait();
+                Log.d(TAG,"Milih:"+item.getKey("code"));
             }
         }
     };
+
+    private void LoadChart(){
+        ReqApiServices X =  new ReqApiServices();
+        X.EventWhenRespon=Jwban2;
+        X.SetAwal();
+        X.urlBuilder.addPathSegments("cart/detail");
+        X.SetAwalRequest();
+        X.request.header("Apphash", MainActivity.ObjIni.DB_Setting.get_Key("HashUser"));
+        RequestBody Body = new FormBody.Builder()
+                .add("trxid",""+mSettings.getInt("NoTrx",0))
+                .build();
+        X.request.post(Body);
+        X.HitNoWait();
+    }
+
+    private final TerimaResponApi Jwban2 = new TerimaResponApi() {
+        @Override
+        public void onGagal(ReqApiServices tool, IOException e) {
+
+        }
+
+        @Override
+        public void OnSukses(ReqApiServices tool, JSONObject Data) {
+            try {
+                if (Data.getString("code").equals("00")) {
+                    final JSONObject dt= Data.getJSONObject("message").getJSONObject("cart  ");
+                    final JSONArray cart= dt.getJSONArray("cart");
+                    Log.d(TAG,"Sukses Load Cart");
+                    Runnable UpdateUI = new Runnable() {
+                        @Override
+                        public void run() {
+                            InsertRow(cart);
+                            InsertTotal(dt);
+                        }
+                    };
+                    MainActivity.ObjIni.runOnUiThread(UpdateUI);
+                }
+            } catch (JSONException e) {}
+        }
+    };
+
 }
