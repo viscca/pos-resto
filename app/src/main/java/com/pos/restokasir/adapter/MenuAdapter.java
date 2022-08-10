@@ -16,6 +16,8 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+
 public class MenuAdapter extends ArrayAdapter<NavigationItem> {
     private final int layoutResourceId;
 
@@ -45,12 +47,15 @@ public class MenuAdapter extends ArrayAdapter<NavigationItem> {
         String Hsl="";
         try {
             Hsl= dt.getString("name");
-            JSONObject Hrg= dt.getJSONObject("sale_delivery");
+            Integer Hrg= dt.getInt("sale_price");
+            JSONObject sd= dt.getJSONObject("sale_delivery");
             switch(dt.getInt("JnsHrg")) {
                 case 0:
-                    Hsl += "\r\nRp." + Hrg.getString("dine_in");
+                    Hrg += sd.getInt("dine_in");
                     break;
             }
+            DecimalFormat formatter = new DecimalFormat("#,###,###");
+            Hsl += "\r\nRp."+formatter.format(Hrg);
         } catch (JSONException e) {}
         return Hsl;
     }
