@@ -18,7 +18,13 @@ public class ReqApiServices {
     private OkHttpClient client = new OkHttpClient();
     public HttpUrl.Builder urlBuilder;
     public Request.Builder request;
+    public Integer KodePath;
+    public Integer JmlErr;
     public TerimaResponApi EventWhenRespon;
+
+    public ReqApiServices() {
+        KodePath=0; JmlErr=0;
+    }
 
     public void SetAwal(){
         urlBuilder = HttpUrl.parse(MainURL).newBuilder();

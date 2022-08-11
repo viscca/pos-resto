@@ -59,7 +59,6 @@ public class LoginActivity extends Activity {
                     Intent newIntent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(newIntent);
                 }
-                return;
             } catch (JSONException e) {}
         }
 

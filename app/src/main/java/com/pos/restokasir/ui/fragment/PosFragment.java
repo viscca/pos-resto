@@ -139,27 +139,7 @@ public class PosFragment extends Fragment {
         }
     }
 
-    private void InsertRow(JSONArray dt){
-        Log.d(TAG,"DataCart "+dt.toString());
-        tableList.removeAllViews();
-        DecimalFormat formatter = new DecimalFormat("#,###,###");
-        Integer Hrg;
-        try {
-            for (int i=0; i < dt.length(); i++) {
-                TableRow tr = new TableRow(getActivity());
-                View v = getLayoutInflater().inflate(R.layout.row_list, tr, false);
-                final JSONObject Isi = dt.getJSONObject(i);
-                ((TextView)v.findViewById(R.id.col1)).setText("Item1");
-                Hrg= Isi.getInt("qty");
-                ((TextView)v.findViewById(R.id.col2)).setText("x"+Hrg);
-                Hrg= Isi.getInt("total");
-                ((TextView)v.findViewById(R.id.col3)).setText("Rp"+formatter.format(Hrg));
-                tableList.addView(v);
-            }
-        } catch (JSONException e) {}
-    }
-
-    private void InsertTotal(JSONObject dt){
+    private void InsertTotal(@NonNull JSONObject dt){
         tableTotal.removeAllViews();
         TableRow tr = new TableRow(getActivity());
         View v = getLayoutInflater().inflate(R.layout.row_list, tr, false);
@@ -213,7 +193,9 @@ public class PosFragment extends Fragment {
             ((TextView)v.findViewById(R.id.col1)).setTextColor(getResources().getColor(R.color.darkgrey));
             ((TextView)v.findViewById(R.id.col2)).setText("");
             Hrg= dt.getInt("total");
-            ((TextView)v.findViewById(R.id.col3)).setText("Rp."+formatter.format(Hrg));
+            String Hsl="Rp."+formatter.format(Hrg);
+            btnpay.setText(Hsl);
+            ((TextView)v.findViewById(R.id.col3)).setText(Hsl);
             ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
             ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.darkgrey));
             tableTotal.addView(v);
@@ -330,6 +312,7 @@ public class PosFragment extends Fragment {
             if(view.getParent()==gvMenu){
                 NavigationItem item = (NavigationItem) parent.getAdapter().getItem(position);
                 ReqApiServices X =  new ReqApiServices();
+                X.KodePath=25;
                 X.EventWhenRespon=Jwban2;
                 X.SetAwal();
                 X.urlBuilder.addPathSegments("cart/add");
@@ -337,7 +320,7 @@ public class PosFragment extends Fragment {
                 X.request.header("Apphash", MainActivity.ObjIni.DB_Setting.get_Key("HashUser"));
                 RequestBody Body = new FormBody.Builder()
                         .add("trxid",""+mSettings.getInt("NoTrx",0))
-                        .add("modifier_id","1,2")
+                        .add("modifier_id","")
                         .add("note","")
                         .add("product_id",item.getKey("code"))
                         .add("pricetype",KodePriceTipe())
@@ -353,6 +336,7 @@ public class PosFragment extends Fragment {
     private void LoadChart(){
         ReqApiServices X =  new ReqApiServices();
         X.EventWhenRespon=Jwban2;
+        X.KodePath=5;
         X.SetAwal();
         X.urlBuilder.addPathSegments("cart/detail");
         X.SetAwalRequest();
@@ -376,7 +360,7 @@ public class PosFragment extends Fragment {
                 if (Data.getString("code").equals("00")) {
                     final JSONObject dt= Data.getJSONObject("message").getJSONObject("cart  ");
                     final JSONArray cart= dt.getJSONArray("cart");
-                    Log.d(TAG,"Sukses Load Cart");
+                    Log.d(TAG,"Sukses Load Cart. "+tool.KodePath);
                     Runnable UpdateUI = new Runnable() {
                         @Override
                         public void run() {
@@ -389,5 +373,55 @@ public class PosFragment extends Fragment {
             } catch (JSONException e) {}
         }
     };
+
+
+    private void InsertRow(@NonNull JSONArray dt){
+        Log.d(TAG,"DataCart "+dt.toString());
+        tableList.removeAllViews();
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        Integer Hrg;
+        try {
+            for (int i=0; i < dt.length(); i++) {
+                TableRow tr = new TableRow(getActivity());
+                View v = getLayoutInflater().inflate(R.layout.row_list, tr, false);
+                final JSONObject Isi = dt.getJSONObject(i);
+                TextView Obj= v.findViewById(R.id.col1);
+                Obj.setText(Isi.getString("product"));
+                Hrg= Isi.getInt("qty");
+                Obj=v.findViewById(R.id.col2);Obj.setText("x"+Hrg);
+                Obj.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        UpdateCartMin(Isi);
+                    }
+                });
+                Hrg= Isi.getInt("total");
+                Obj=v.findViewById(R.id.col3);Obj.setText("Rp"+formatter.format(Hrg));
+                tableList.addView(v);
+            }
+        } catch (JSONException e) {}
+    }
+
+    private void UpdateCartMin(@NonNull JSONObject dt){
+        Log.d(TAG,"Kurangi Qty Cart: "+dt.toString());
+        try{
+            ReqApiServices X =  new ReqApiServices();
+            X.EventWhenRespon=Jwban2;
+            X.SetAwal();
+            X.urlBuilder.addPathSegments("cart/update");
+            X.SetAwalRequest();
+            X.request.header("Apphash", MainActivity.ObjIni.DB_Setting.get_Key("HashUser"));
+            RequestBody Body = new FormBody.Builder()
+                    .add("trxid",""+mSettings.getInt("NoTrx",0))
+                    .add("modifier_id","")
+                    .add("note",dt.getString("note"))
+                    .add("product_id",dt.getString("product_id"))
+                    .add("pricetype",KodePriceTipe())
+                    .add("qty","-1")
+                    .build();
+            X.request.post(Body);
+            X.HitNoWait();
+        } catch (JSONException e) {}
+    }
 
 }
