@@ -306,6 +306,21 @@ public class PosFragment extends Fragment {
         }
     };
 
+    private void LoadChart(){
+        ReqApiServices X =  new ReqApiServices();
+        X.EventWhenRespon=Jwban2;
+        X.KodePath=5;
+        X.SetAwal();
+        X.urlBuilder.addPathSegments("cart/detail");
+        X.SetAwalRequest();
+        X.request.header("Apphash", MainActivity.ObjIni.DB_Setting.get_Key("HashUser"));
+        RequestBody Body = new FormBody.Builder()
+                .add("trxid",""+mSettings.getInt("NoTrx",0))
+                .build();
+        X.request.post(Body);
+        X.HitNoWait();
+    }
+
     private AdapterView.OnItemClickListener MenuDipilih= new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -332,21 +347,6 @@ public class PosFragment extends Fragment {
             }
         }
     };
-
-    private void LoadChart(){
-        ReqApiServices X =  new ReqApiServices();
-        X.EventWhenRespon=Jwban2;
-        X.KodePath=5;
-        X.SetAwal();
-        X.urlBuilder.addPathSegments("cart/detail");
-        X.SetAwalRequest();
-        X.request.header("Apphash", MainActivity.ObjIni.DB_Setting.get_Key("HashUser"));
-        RequestBody Body = new FormBody.Builder()
-                .add("trxid",""+mSettings.getInt("NoTrx",0))
-                .build();
-        X.request.post(Body);
-        X.HitNoWait();
-    }
 
     private final TerimaResponApi Jwban2 = new TerimaResponApi() {
         @Override

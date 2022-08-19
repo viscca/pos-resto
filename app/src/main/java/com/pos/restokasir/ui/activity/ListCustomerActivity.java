@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -56,6 +57,7 @@ public class ListCustomerActivity extends AppCompatActivity {
         ObjIni = this;
         DB_Setting=new C_DB_Setting(this);
         lv = findViewById(R.id.list);
+        lv.setOnItemClickListener(CustDipilih);
         eCari = findViewById(R.id.eCari);
         eCari.setOnKeyListener(TentangTombol);
      }
@@ -72,11 +74,16 @@ public class ListCustomerActivity extends AppCompatActivity {
             onBackPressed();
             return true;
         } else if (item.getItemId() == R.id.action_cust) {
-            Intent intent = new Intent(this, AddCustomerActivity.class);
-            startActivity(intent);
-            overridePendingTransition(0, 0);
+            goto_FromCust("");
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void goto_FromCust(String JSON){
+        Intent intent = new Intent(this, AddCustomerActivity.class);
+        intent.putExtra("dataJSON", JSON);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
     }
 
     @Override
@@ -141,13 +148,22 @@ public class ListCustomerActivity extends AppCompatActivity {
                     };
                     runOnUiThread(UpdateUI);
                 }
-                return;
             } catch (JSONException e) {}
         }
 
         @Override
         public void onGagal(ReqApiServices tool, IOException e) {
 
+        }
+    };
+
+    private AdapterView.OnItemClickListener CustDipilih= new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if(view.getParent()==lv){
+                NavigationItem item = (NavigationItem) parent.getAdapter().getItem(position);
+                goto_FromCust(item.Data.toString());
+            }
         }
     };
 

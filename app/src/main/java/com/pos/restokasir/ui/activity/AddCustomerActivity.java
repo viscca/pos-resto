@@ -41,10 +41,11 @@ import okhttp3.RequestBody;
 public class AddCustomerActivity extends AppCompatActivity {
     private int mYear, mMonth, mDay;
     private final int DATE_DIALOG_ID = 0;
-    private final String[] arrMonth = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
     private C_DB_Setting DB_Setting;
     private EditText eHP, eNama, eEmail, eTgl, eAlamat;
     private AppCompatButton btnsimpan;
+    private Toolbar mToolbar;
+    private Integer idCust=0;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -53,9 +54,8 @@ public class AddCustomerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_customer);
         DB_Setting=new C_DB_Setting(this);
 
-        String Judul = "Tambah Pelanggan";
-        Toolbar mToolbar = findViewById(R.id.toolbar_actionbar);
-        mToolbar.setTitle(Judul);
+        mToolbar = findViewById(R.id.toolbar_actionbar);
+        mToolbar.setTitle("Tambah Pelanggan");
         mToolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(mToolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -104,6 +104,35 @@ public class AddCustomerActivity extends AppCompatActivity {
             showDialog(DATE_DIALOG_ID);
             return true;
         });
+
+        LoadData();
+    }
+
+    private void LoadData(){
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) return;
+        try{
+            JSONObject dt =new JSONObject(extras.getString("dataJSON",""));
+            idCust= dt.getInt("id");
+            if(idCust>0) mToolbar.setTitle("Edit Pelanggan");
+            eNama.setText(dt.getString("name"));
+            eEmail.setText(dt.getString("email"));
+            eAlamat.setText(dt.getString("address"));
+            ParsingTgl(dt.getString("date_of_birth"));
+        } catch (JSONException e) {}
+    }
+
+    private void ParsingTgl(String tgl){
+        String[] separated = tgl.split("-");
+        if (separated.length==3){
+            try {
+                mYear = Integer.parseInt(separated[0]);
+                mMonth = Integer.parseInt(separated[1]);
+                mMonth--;
+                mDay = Integer.parseInt(separated[2]);
+                CetakTgl();
+            } catch(NumberFormatException nfe) {}
+        }
     }
 
     @Override
@@ -123,10 +152,15 @@ public class AddCustomerActivity extends AppCompatActivity {
                     mYear = year;
                     mMonth = monthOfYear;
                     mDay = dayOfMonth;
-                    String sdate = LPad(mDay + "") + "/" + arrMonth[mMonth] + "/" + mYear;
-                    eTgl.setText(sdate);
+                    CetakTgl();
                 }
             };
+
+    private void CetakTgl(){
+        final String[] arrMonth = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+        String sdate = LPad(mDay + "") + "/" + arrMonth[mMonth] + "/" + mYear;
+        eTgl.setText(sdate);
+    }
 
     private static String LPad(String schar) {
         StringBuilder sret = new StringBuilder(schar);
@@ -158,15 +192,16 @@ public class AddCustomerActivity extends AppCompatActivity {
                 ReqApiServices X =  new ReqApiServices();
                 X.EventWhenRespon=Jwban1;
                 X.SetAwal();
-                X.urlBuilder.addPathSegments("customer/update");
+                String S="create"; if (idCust>0) S="update";
+                X.urlBuilder.addPathSegments("customer/"+S);
                 X.SetAwalRequest();
                 X.request.header("Apphash", DB_Setting.get_Key("HashUser"));
-                RequestBody Body = new FormBody.Builder()
+                FormBody.Builder Body = new FormBody.Builder()
                         .add("name", eNama.getText().toString())
                         .add("email", eEmail.getText().toString())
-                        .add("address", eAlamat.getText().toString())
-                        .build();
-                X.request.post(Body);
+                        .add("address", eAlamat.getText().toString());
+                if (idCust>0) Body.add("id",idCust.toString());
+                X.request.post(Body.build());
                 X.HitNoWait();
             }
         }
