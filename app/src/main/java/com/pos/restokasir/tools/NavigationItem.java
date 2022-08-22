@@ -47,6 +47,16 @@ public class NavigationItem {
         return x;
     }
 
+    public static NavigationItem catitem(String nama, String ket){
+        NavigationItem x=new NavigationItem();
+        x.Data = new JSONObject();
+        try {
+            x.Data.put("nama",nama);
+            x.Data.put("ket",ket);
+        } catch (JSONException e) {}
+        return x;
+    }
+
     public String getKey(String key){
         try {
             return Data.getString(key);

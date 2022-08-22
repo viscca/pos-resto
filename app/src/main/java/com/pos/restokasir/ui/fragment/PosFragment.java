@@ -31,6 +31,8 @@ import com.pos.restokasir.adapter.MenuAdapter;
 import com.pos.restokasir.databinding.FragmentPosBinding;
 import com.pos.restokasir.db_sqlite.C_DB_Setting;
 import com.pos.restokasir.tools.NavigationItem;
+import com.pos.restokasir.ui.activity.AddCategoryActivity;
+import com.pos.restokasir.ui.activity.ListCategoryActivity;
 import com.pos.restokasir.ui.activity.ListCustomerActivity;
 import com.pos.restokasir.ui.activity.ListDiscountActivity;
 import com.pos.restokasir.ui.activity.MainActivity;
@@ -230,7 +232,9 @@ public class PosFragment extends Fragment {
                 startActivity(intent);
                 requireActivity().overridePendingTransition(0, 0);
             } else if (v==btnkategori) {
-
+                Intent intent = new Intent(getActivity(), ListCategoryActivity.class);
+                startActivity(intent);
+                requireActivity().overridePendingTransition(0, 0);
             }
         }
     };

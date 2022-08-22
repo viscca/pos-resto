@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -23,11 +22,8 @@ import androidx.appcompat.widget.Toolbar;
 import com.pos.restokasir.R;
 import com.pos.restokasir.Service.ReqApiServices;
 import com.pos.restokasir.Service.TerimaResponApi;
-import com.pos.restokasir.adapter.MenuAdapter;
 import com.pos.restokasir.db_sqlite.C_DB_Setting;
-import com.pos.restokasir.tools.NavigationItem;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,7 +32,6 @@ import java.util.Calendar;
 import java.util.Objects;
 
 import okhttp3.FormBody;
-import okhttp3.RequestBody;
 
 public class AddCustomerActivity extends AppCompatActivity {
     private int mYear, mMonth, mDay;
