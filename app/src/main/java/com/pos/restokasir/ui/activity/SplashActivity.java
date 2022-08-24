@@ -3,9 +3,11 @@ package com.pos.restokasir.ui.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Display;
 import android.view.Window;
 import android.view.WindowManager;
@@ -14,11 +16,26 @@ import android.widget.Button;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.pos.restokasir.R;
+import com.pos.restokasir.Service.ReqApiServices;
+import com.pos.restokasir.Service.TerimaResponApi;
+import com.pos.restokasir.db_sqlite.C_DB_Setting;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.Response;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends Activity {
-    private static final long SPLASH_TIMEOUT = 2000;
-    private boolean gone;
+    private final String TAG="Prs_SplashActivity";
+    private final long SPLASH_TIMEOUT = 2000;
+    private String HashUser;
+    private C_DB_Setting DB_Setting ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +59,57 @@ public class SplashActivity extends Activity {
             layout.setBackgroundResource(R.drawable.splash_ls);
         }
 
-        Button goButton = findViewById(R.id.goButton);
-        goButton.setOnClickListener(v -> go());
+        //Button goButton = findViewById(R.id.goButton);
+        //goButton.setOnClickListener(v -> go());
+        DB_Setting = new C_DB_Setting(this);
+        HashUser = DB_Setting.get_Key("HashUser");
+        if(DB_Setting.mSettings.getString("idUser","").equals("") || HashUser.equals(""))
+            goPageLogin();else testProfile();
+    }
+
+    private void goPageLogin() {
         new Handler().postDelayed(() -> {
-            if (!gone) go();
+            Intent newActivity = new Intent(SplashActivity.this,
+                    LoginActivity.class);
+            startActivity(newActivity);
+            SplashActivity.this.finish();
         }, SPLASH_TIMEOUT);
     }
 
-    private void go() {
-        gone = true;
-        Intent newActivity = new Intent(SplashActivity.this,
-                LoginActivity.class);
-        startActivity(newActivity);
-        SplashActivity.this.finish();
+    private void testProfile() {
+        ReqApiServices X =  new ReqApiServices();
+        X.EventWhenRespon=Jwban1;
+        X.SetAwal();
+        X.urlBuilder.addPathSegments("profile/info");
+        X.SetAwalRequest();
+        X.request.header("Apphash", HashUser);
+        X.request.post(new FormBody.Builder()
+                .build());
+        X.HitNoWait();
     }
+
+    private final TerimaResponApi Jwban1 = new TerimaResponApi() {
+        @Override
+        public void OnSukses(ReqApiServices tool, JSONObject Data) {
+            try {
+                if(Data.getString("code").equals("00")){
+                    final JSONObject User= Data.getJSONObject("message").getJSONObject("user");
+                    DB_Setting.add("HashUser",User.getString("user_key"));
+                    SharedPreferences.Editor Ubah = DB_Setting.EditorPref();
+                    Ubah.putString("fullName", User.getString("full_name"));
+                    Ubah.apply();
+                    //---------------
+                    Intent newIntent = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(newIntent);
+                }
+                return;
+            } catch (JSONException e) {}
+            goPageLogin();
+        }
+
+        @Override
+        public void onGagal(ReqApiServices tool, IOException e) {
+
+        }
+    };
 }

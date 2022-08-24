@@ -28,11 +28,11 @@ public class HistoryAdapter extends ArrayAdapter<NavigationItem> {
 
         NavigationItem menu = getItem(position);
         TextView tgl = convertView.findViewById(R.id.txtTgl);
-        tgl.setText(menu.getText());
-        TextView ket = convertView.findViewById(R.id.txtMenu);
-        ket.setText(menu.mKet);
-        TextView total = convertView.findViewById(R.id.txtTotal);
-        total.setText(menu.mTotal);
+        tgl.setText(menu.getKey("nama"));
+        tgl = convertView.findViewById(R.id.txtMenu);
+        tgl.setText(menu.getKey("hp"));
+        tgl = convertView.findViewById(R.id.txtTotal);
+        tgl.setText(menu.getKey("Email"));
         ((ImageView)convertView.findViewById(R.id.imgIcon)).setImageDrawable(menu.getDrawable());
 
         return convertView;

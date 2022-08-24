@@ -28,11 +28,11 @@ public class CustomerAdapter extends ArrayAdapter<NavigationItem> {
 
         NavigationItem menu = getItem(position);
         TextView nama = convertView.findViewById(R.id.txtNama);
-        nama.setText(menu.getText());
-        TextView hp = convertView.findViewById(R.id.txtHP);
-        hp.setText(menu.mHP);
-        TextView email = convertView.findViewById(R.id.txtEmail);
-        email.setText(menu.mEmail);
+        nama.setText(menu.getKey("name"));
+        nama = convertView.findViewById(R.id.txtHP);
+        nama.setText(menu.getKey("gst_number"));
+        nama = convertView.findViewById(R.id.txtEmail);
+        nama.setText(menu.getKey("email"));
         ((ImageView)convertView.findViewById(R.id.imgIcon)).setImageDrawable(menu.getDrawable());
 
         return convertView;

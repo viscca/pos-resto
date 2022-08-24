@@ -28,11 +28,10 @@ public class HistoryFragment extends Fragment {
         View root = binding.getRoot();
 
         ListView lv = root.findViewById(R.id.list);
-        HistoryAdapter histAdapter;
-        histAdapter = new HistoryAdapter(inflater.getContext(), R.layout.row_history);
-        histAdapter.add(NavigationItem.histItem("22/07/2022 13:15", getResources().getDrawable(R.drawable.ic_money), "Nasi Goreng (Reguler)", "Rp20.000"));
-        histAdapter.add(NavigationItem.histItem("22/07/2022 15:20", getResources().getDrawable(R.drawable.ic_wallet), "Nasi Goreng (Spesial), Teh Manis", "Rp35.000"));
-        histAdapter.add(NavigationItem.histItem("22/07/2022 17:11", getResources().getDrawable(R.drawable.ic_credit_card), "Ayam Goreng (Reguler)", "Rp10.000"));
+        HistoryAdapter histAdapter = new HistoryAdapter(inflater.getContext(), R.layout.row_history);
+        histAdapter.add(NavigationItem.cusitem("22/07/2022 13:15", getResources().getDrawable(R.drawable.ic_money), "Nasi Goreng (Reguler)", "Rp20.000"));
+        histAdapter.add(NavigationItem.cusitem("22/07/2022 15:20", getResources().getDrawable(R.drawable.ic_wallet), "Nasi Goreng (Spesial), Teh Manis", "Rp35.000"));
+        histAdapter.add(NavigationItem.cusitem("22/07/2022 17:11", getResources().getDrawable(R.drawable.ic_credit_card), "Ayam Goreng (Reguler)", "Rp10.000"));
         lv.setAdapter(histAdapter);
         lv.setOnItemClickListener(DiPilih);
 

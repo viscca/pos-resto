@@ -6,16 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pos.restokasir.R;
 import com.pos.restokasir.tools.NavigationItem;
 
-public class DiscountAdapter extends ArrayAdapter<NavigationItem> {
+public class CategoryAdapter extends ArrayAdapter<NavigationItem> {
     private final int layoutResourceId;
 
-    public DiscountAdapter(Context context, int layoutResourceId) {
+    public CategoryAdapter(Context context, int layoutResourceId) {
         super(context, layoutResourceId);
         this.layoutResourceId = layoutResourceId;
     }
@@ -29,8 +28,8 @@ public class DiscountAdapter extends ArrayAdapter<NavigationItem> {
         NavigationItem menu = getItem(position);
         TextView nama = convertView.findViewById(R.id.txtNama);
         nama.setText(menu.getKey("nama"));
-        nama = convertView.findViewById(R.id.txtJumlah);
-        nama.setText(menu.getKey("Jumlah"));
+        TextView ket = convertView.findViewById(R.id.txtKet);
+        ket.setText(menu.getKey("ket"));
 
         return convertView;
     }

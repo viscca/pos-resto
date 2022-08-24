@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.pos.restokasir">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -20,6 +24,7 @@
             android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,55 +33,63 @@
             android:clearTaskOnLaunch="true"
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar" />
         <activity
             android:name=".ui.activity.LoginActivity"
             android:clearTaskOnLaunch="true"
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
-        </activity>
-        <activity android:name=".ui.activity.ProductActivity"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar" />
+        <activity
+            android:name=".ui.activity.ProductActivity"
             android:clearTaskOnLaunch="true"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
-        </activity>
-        <activity android:name=".ui.activity.PayActivity"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar" />
+        <activity
+            android:name=".ui.activity.PayActivity"
             android:clearTaskOnLaunch="true"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
-        </activity>
-        <activity android:name=".ui.activity.ReceiptActivity"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar" />
+        <activity
+            android:name=".ui.activity.ReceiptActivity"
             android:clearTaskOnLaunch="true"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
-        </activity>
-        <activity android:name=".ui.activity.DetailHistoryActivity"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar" />
+        <activity
+            android:name=".ui.activity.DetailHistoryActivity"
             android:clearTaskOnLaunch="true"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
-        </activity>
-        <activity android:name=".ui.activity.AddDiscountActivity"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar" />
+        <activity
+            android:name=".ui.activity.AddDiscountActivity"
             android:clearTaskOnLaunch="true"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
-        </activity>
-        <activity android:name=".ui.activity.ListDiscountActivity"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar" />
+        <activity
+            android:name=".ui.activity.ListDiscountActivity"
             android:clearTaskOnLaunch="true"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
-        </activity>
-        <activity android:name=".ui.activity.ListCustomerActivity"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar" />
+        <activity
+            android:name=".ui.activity.ListCustomerActivity"
             android:clearTaskOnLaunch="true"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
-        </activity>
-        <activity android:name=".ui.activity.AddCustomerActivity"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar" />
+        <activity
+            android:name=".ui.activity.AddCustomerActivity"
             android:clearTaskOnLaunch="true"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar" />
+        <activity
+            android:name=".ui.activity.AddCategoryActivity"
+            android:clearTaskOnLaunch="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar" />
+        <activity
+            android:name=".ui.activity.ListCategoryActivity"
+            android:clearTaskOnLaunch="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.POSRESTOKASIR.NoActionBar" />
     </application>
 
 </manifest>

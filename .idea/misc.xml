@@ -3,27 +3,45 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/activity_product.xml" value="0.358695652173913" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/activity_splash.xml" value="0.18802083333333333" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/app_bar_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/content_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/fragment_pos.xml" value="0.18802083333333333" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/nav_header_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/row_list.xml" value="0.358695652173913" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/layout/toolbar_menu.xml" value="0.18802083333333333" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />
+        <entry key="..\:/Android/pos-resto/app/src/main/res/menu/main.xml" value="0.18802083333333333" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/drawable/ic_add.xml" value="0.196" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/drawable/ic_launcher_background.xml" value="0.196" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.196" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/drawable/ic_person.xml" value="0.196" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/drawable/spinner_icon.xml" value="0.196" />
+        <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_add_category.xml" value="0.18" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_add_customer.xml" value="0.22" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_add_discount.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_detail_history.xml" value="0.18" />
+        <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_list_category.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_list_customer.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_list_discount.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_pay.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_product.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_receipt.xml" value="0.1" />
+        <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/app_bar_main.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/fragment_pos.xml" value="0.16336633663366337" />
+        <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/nav_header_main.xml" value="0.1" />
+        <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/row_category.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/row_customer.xml" value="0.16916488222698073" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/row_detail_history.xml" value="0.25" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/row_discount.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/row_history.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/row_list.xml" value="0.1" />
+        <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
+        <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/menu/category.xml" value="0.18" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/menu/customer.xml" value="0.1" />
-        <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/menu/discount.xml" value="0.1" />
+        <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/menu/discount.xml" value="0.18" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/POSRESTOKASIR/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/POSRESTOKASIR/app/src/main/res/layout/app_bar_main.xml" value="0.1" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/POSRESTOKASIR/app/src/main/res/layout/content_main.xml" value="0.1" />

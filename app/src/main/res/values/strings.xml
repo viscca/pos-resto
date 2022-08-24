@@ -15,11 +15,13 @@
     <string name="lang_id" translatable="false">Indonesia</string>
     <string name="diskon">Diskon</string>
     <string name="pelanggan">Pelanggan</string>
+    <string name="kategori">Kategori</string>
 
     <string-array name="metode">
         <item>Dine In</item>
         <item>Take Away</item>
-        <item>Delivery</item>
+        <item>Go Send</item>
+        <item>Grab</item>
     </string-array>
 
     <string-array name="tipe_discount">
