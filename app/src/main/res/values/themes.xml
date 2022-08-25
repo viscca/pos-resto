@@ -41,6 +41,15 @@
         <item name="android:paddingBottom">@dimen/dimens_10dp</item>
     </style>
 
+    <style name="MyEditTextMod">
+        <item name="android:textSize">@dimen/text_16sp</item>
+        <item name="android:background">@drawable/selector_bg_edittext_mod</item>
+        <item name="android:paddingLeft">@dimen/dimens_15dp</item>
+        <item name="android:paddingTop">8.3dp</item>
+        <item name="android:paddingRight">@dimen/dimens_15dp</item>
+        <item name="android:paddingBottom">10dp</item>
+    </style>
+
     <style name="MySpinner" parent="android:Widget.DeviceDefault.Spinner">
         <item name="android:textSize">@dimen/text_16sp</item>
         <item name="android:background">@drawable/spinner_icon</item>
@@ -72,6 +81,14 @@
         <item name="android:textColor">@color/grey_200</item>
         <item name="android:background">@drawable/selector_bg_button3</item>
         <item name="android:minHeight">@dimen/dimens_30dp</item>
+    </style>
+
+    <style name="ButtonX">
+        <item name="android:textSize">@dimen/text_18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:background">@drawable/buttonselect</item>
+        <item name="android:minHeight">@dimen/dimens_40dp</item>
     </style>
 
     <style name="ToolBarStyle" parent="">

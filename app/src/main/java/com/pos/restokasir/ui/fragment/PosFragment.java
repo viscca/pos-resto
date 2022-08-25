@@ -19,7 +19,6 @@ import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,16 +28,14 @@ import com.pos.restokasir.Service.ReqApiServices;
 import com.pos.restokasir.Service.TerimaResponApi;
 import com.pos.restokasir.adapter.MenuAdapter;
 import com.pos.restokasir.databinding.FragmentPosBinding;
-import com.pos.restokasir.db_sqlite.C_DB_Setting;
 import com.pos.restokasir.tools.NavigationItem;
-import com.pos.restokasir.ui.activity.AddCategoryActivity;
 import com.pos.restokasir.ui.activity.ListCategoryActivity;
 import com.pos.restokasir.ui.activity.ListCustomerActivity;
 import com.pos.restokasir.ui.activity.ListDiscountActivity;
 import com.pos.restokasir.ui.activity.MainActivity;
 import com.pos.restokasir.ui.activity.PayActivity;
 import com.pos.restokasir.ui.activity.ProductActivity;
-import com.pos.restokasir.ui.activity.SplashActivity;
+import com.pos.restokasir.ui.dialog.VariantModifierDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,11 +44,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class PosFragment extends Fragment {
     private final String TAG="Prs_FragmentPOS";
@@ -79,6 +73,7 @@ public class PosFragment extends Fragment {
         binding = null;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onStart() {
         super.onStart();
@@ -133,7 +128,7 @@ public class PosFragment extends Fragment {
         final String Key= "NoTrx";
         if(mSettings.getInt(Key,0)==0){
             SharedPreferences.Editor Ubah = mSettings.edit();
-            Integer I= 1000;
+            int I= 1000;
             I= (int) (Math.random() * I + 1);
             Ubah.putInt(Key, I);
             Ubah.apply();
@@ -141,6 +136,7 @@ public class PosFragment extends Fragment {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void InsertTotal(@NonNull JSONObject dt){
         tableTotal.removeAllViews();
         TableRow tr = new TableRow(getActivity());
@@ -157,7 +153,7 @@ public class PosFragment extends Fragment {
             ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
             ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.darkgrey));
             tableTotal.addView(v);
-        } catch (JSONException e) {}
+        } catch (JSONException ignored) {}
 
         tr = new TableRow(getActivity());
         v = getLayoutInflater().inflate(R.layout.row_list, tr, false);
@@ -171,7 +167,7 @@ public class PosFragment extends Fragment {
             ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Small);
             ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.grey_200));
             tableTotal.addView(v);
-        } catch (JSONException e) {}
+        } catch (JSONException ignored) {}
 
         tr = new TableRow(getActivity());
         v = getLayoutInflater().inflate(R.layout.row_list, tr, false);
@@ -185,7 +181,7 @@ public class PosFragment extends Fragment {
             ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Small);
             ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.grey_200));
             tableTotal.addView(v);
-        } catch (JSONException e) {}
+        } catch (JSONException ignored) {}
 
         tr = new TableRow(getActivity());
         v = getLayoutInflater().inflate(R.layout.row_list, tr, false);
@@ -201,7 +197,7 @@ public class PosFragment extends Fragment {
             ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
             ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.darkgrey));
             tableTotal.addView(v);
-        } catch (JSONException e) {}
+        } catch (JSONException ignored) {}
     }
 
     private final View.OnClickListener DiKlik= new View.OnClickListener() {
@@ -274,7 +270,7 @@ public class PosFragment extends Fragment {
 
     private String KodePriceTipe(){
         final String[] Kd = {"dine_in","take_away","GoSend","Grab"};
-        final Integer Pilih= spinner.getSelectedItemPosition();
+        final int Pilih= spinner.getSelectedItemPosition();
         if(Kd.length<=Pilih) return "";
         return Kd[Pilih];
     }
@@ -287,21 +283,16 @@ public class PosFragment extends Fragment {
                     final JSONArray Prd= Data.getJSONObject("message").getJSONArray("data");
                     MenuAdapter trxAdapter= new MenuAdapter(inflater.getContext(), R.layout.list_menu);
                     for (int i=0; i < Prd.length(); i++) {
-                        final NavigationItem Isi = NavigationItem.BuatItem(Prd.getJSONObject(i),
+                        @SuppressLint("UseCompatLoadingForDrawables") final NavigationItem Isi = NavigationItem.BuatItem(Prd.getJSONObject(i),
                                 getResources().getDrawable(R.drawable.food)
                         );
                         Isi.Data.put("JnsHrg",spinner.getSelectedItemPosition());
                         trxAdapter.add(Isi);
                     }
-                    Runnable UpdateUI=new Runnable() {
-                        @Override
-                        public void run() {
-                            gvMenu.setAdapter(trxAdapter);
-                        }
-                    };
+                    Runnable UpdateUI= () -> gvMenu.setAdapter(trxAdapter);
                     MainActivity.ObjIni.runOnUiThread(UpdateUI);
                 }
-            } catch (JSONException e) {}
+            } catch (JSONException ignored) {}
         }
 
         @Override
@@ -325,7 +316,7 @@ public class PosFragment extends Fragment {
         X.HitNoWait();
     }
 
-    private AdapterView.OnItemClickListener MenuDipilih= new AdapterView.OnItemClickListener() {
+    private final AdapterView.OnItemClickListener MenuDipilih= new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             if(view.getParent()==gvMenu){
@@ -365,22 +356,20 @@ public class PosFragment extends Fragment {
                     final JSONObject dt= Data.getJSONObject("message").getJSONObject("cart  ");
                     final JSONArray cart= dt.getJSONArray("cart");
                     Log.d(TAG,"Sukses Load Cart. "+tool.KodePath);
-                    Runnable UpdateUI = new Runnable() {
-                        @Override
-                        public void run() {
-                            InsertRow(cart);
-                            InsertTotal(dt);
-                        }
+                    Runnable UpdateUI = () -> {
+                        InsertRow(cart);
+                        InsertTotal(dt);
                     };
                     MainActivity.ObjIni.runOnUiThread(UpdateUI);
                 }
-            } catch (JSONException e) {}
+            } catch (JSONException ignored) {}
         }
     };
 
 
+    @SuppressLint("SetTextI18n")
     private void InsertRow(@NonNull JSONArray dt){
-        Log.d(TAG,"DataCart "+dt.toString());
+        Log.d(TAG,"DataCart "+ dt);
         tableList.removeAllViews();
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         Integer Hrg;
@@ -393,21 +382,16 @@ public class PosFragment extends Fragment {
                 Obj.setText(Isi.getString("product"));
                 Hrg= Isi.getInt("qty");
                 Obj=v.findViewById(R.id.col2);Obj.setText("x"+Hrg);
-                Obj.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        UpdateCartMin(Isi);
-                    }
-                });
+                Obj.setOnClickListener(view -> UpdateCartMin(Isi));
                 Hrg= Isi.getInt("total");
                 Obj=v.findViewById(R.id.col3);Obj.setText("Rp"+formatter.format(Hrg));
                 tableList.addView(v);
             }
-        } catch (JSONException e) {}
+        } catch (JSONException ignored) {}
     }
 
     private void UpdateCartMin(@NonNull JSONObject dt){
-        Log.d(TAG,"Kurangi Qty Cart: "+dt.toString());
+        Log.d(TAG,"Kurangi Qty Cart: "+ dt);
         try{
             ReqApiServices X =  new ReqApiServices();
             X.EventWhenRespon=Jwban2;
@@ -425,7 +409,12 @@ public class PosFragment extends Fragment {
                     .build();
             X.request.post(Body);
             X.HitNoWait();
-        } catch (JSONException e) {}
+        } catch (JSONException ignored) {}
+    }
+
+    private void ShowDialogVarMod() {
+        VariantModifierDialog dlgVarMod = new VariantModifierDialog(requireActivity());
+        dlgVarMod.show();
     }
 
 }

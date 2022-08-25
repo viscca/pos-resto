@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/txt_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingTop="@dimen/dimens_10dp"
+            android:text="Box A"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <ListView
+            android:id="@+id/listVariant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_menu"
+            android:divider="@color/white"
+            android:dividerHeight="0dp" />
+
+        <TextView
+            android:id="@+id/txt_modifier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/listVariant"
+            android:layout_marginTop="@dimen/dimens_5dp"
+            android:background="@color/white"
+            android:text="Menu Tambahan"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <ListView
+            android:id="@+id/listModifier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_modifier"
+            android:divider="@color/white"
+            android:dividerHeight="0dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/LL_Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_15dp"
+        android:layout_marginStart="@dimen/dimens_15dp"
+        android:layout_marginEnd="@dimen/dimens_15dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_pilih"
+            style="@style/Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight=".30"
+            android:text="PILIH"
+            android:textAppearance="?android:attr/textAppearanceButton" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            style="@style/ButtonX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight=".60"
+            android:gravity="center"
+            android:text="Tutup"
+            android:textAppearance="?android:attr/textAppearanceButton" />
+    </LinearLayout>
+</LinearLayout>
