@@ -56,19 +56,25 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/darkgrey" />
 
-                    <RadioButton
-                        android:id="@+id/rb1"
+                    <RadioGroup
+                        android:id="@+id/opsiTunai"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="Rp30.000" />
+                        android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/rb2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="Rp50.000" />
+                        <RadioButton
+                            android:id="@+id/rb1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp30.000" />
+
+                        <RadioButton
+                            android:id="@+id/rb2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:text="Rp50.000" />
+                    </RadioGroup>
                 </TableRow>
 
                 <TableRow
@@ -87,8 +93,6 @@
                         style="@style/MyEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:layout_span="2"
                         android:autofillHints=""
                         android:hint="Rp22.600"
                         android:inputType="number"
@@ -112,55 +116,43 @@
                         android:id="@+id/txtEDC"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/dimens_50dp"
-                        android:gravity="center_vertical"
                         android:text="EDC"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/darkgrey" />
 
-                    <RadioButton
-                        android:id="@+id/rbBCA"
-                        android:layout_width="wrap_content"
+                    <RadioGroup
+                        android:id="@+id/opsiEDC"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="BCA" />
+                        android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/rbMDR"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="Mandiri" />
-                </TableRow>
+                        <RadioButton
+                            android:id="@+id/rbBCA"
+                            android:layout_width="128dp"
+                            android:layout_height="wrap_content"
+                            android:text="BCA" />
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
+                        <RadioButton
+                            android:id="@+id/rbMDR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mandiri" />
 
-                    <TextView
-                        android:id="@+id/txt1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/dimens_50dp"
-                        android:gravity="center_vertical"
-                        android:text=""
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/darkgrey" />
+                        <RadioButton
+                            android:id="@+id/rbBRI"
+                            android:layout_width="128dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="-210dp"
+                            android:layout_marginTop="40dp"
+                            android:text="BRI" />
 
-                    <RadioButton
-                        android:id="@+id/rbBRI"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="BRI" />
-
-                    <RadioButton
-                        android:id="@+id/rbBNI"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="BNI" />
+                        <RadioButton
+                            android:id="@+id/rbBNI"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="40dp"
+                            android:text="BNI" />
+                    </RadioGroup>
                 </TableRow>
 
                 <View
@@ -179,56 +171,45 @@
                         android:id="@+id/txtLain"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/dimens_50dp"
                         android:gravity="center_vertical"
                         android:text="Lainnya"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/darkgrey" />
 
-                    <RadioButton
-                        android:id="@+id/rbShopeepay"
-                        android:layout_width="wrap_content"
+                    <RadioGroup
+                        android:id="@+id/opsiOthers"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="Shopeepay" />
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rbShopeepay"
+                            android:layout_width="123dp"
+                            android:layout_height="wrap_content"
+                            android:text="Shopeepay" />
 
                     <RadioButton
                         android:id="@+id/rbGopay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
                         android:text="Gopay" />
-                </TableRow>
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
+                        <RadioButton
+                            android:id="@+id/rbOvo"
+                            android:layout_width="123dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="-195dp"
+                            android:layout_marginTop="40dp"
+                            android:text="Ovo" />
 
-                    <TextView
-                        android:id="@+id/txt2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/dimens_50dp"
-                        android:gravity="center_vertical"
-                        android:text=""
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/darkgrey" />
-
-                    <RadioButton
-                        android:id="@+id/rbOvo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="Ovo" />
-
-                    <RadioButton
-                        android:id="@+id/rbDana"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="Dana" />
-                </TableRow>
+                        <RadioButton
+                            android:id="@+id/rbDana"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="40dp"
+                            android:text="Dana" />
+                    </RadioGroup>
+            </TableRow>
 
                 <View
                     android:layout_width="match_parent"
