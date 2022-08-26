@@ -51,7 +51,7 @@ public class ListCustomerActivity extends AppCompatActivity {
         mToolbar.setTitle(Judul);
         mToolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(mToolbar);
-        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         ObjIni = this;
@@ -135,20 +135,15 @@ public class ListCustomerActivity extends AppCompatActivity {
                     final JSONArray Prd= Data.getJSONObject("message").getJSONArray("data");
                     CustomerAdapter custAdapter = new CustomerAdapter(ObjIni, R.layout.row_customer);
                     for (int i=0; i < Prd.length(); i++) {
-                        final NavigationItem Isi = NavigationItem.BuatItem(Prd.getJSONObject(i),
+                        @SuppressLint("UseCompatLoadingForDrawables") final NavigationItem Isi = NavigationItem.BuatItem(Prd.getJSONObject(i),
                                 getResources().getDrawable(R.drawable.ic_person)
                         );
                         custAdapter.add(Isi);
                     }
-                    Runnable UpdateUI=new Runnable() {
-                        @Override
-                        public void run() {
-                            lv.setAdapter(custAdapter);
-                        }
-                    };
+                    Runnable UpdateUI= () -> lv.setAdapter(custAdapter);
                     runOnUiThread(UpdateUI);
                 }
-            } catch (JSONException e) {}
+            } catch (JSONException ignored) {}
         }
 
         @Override
@@ -157,7 +152,7 @@ public class ListCustomerActivity extends AppCompatActivity {
         }
     };
 
-    private AdapterView.OnItemClickListener CustDipilih= new AdapterView.OnItemClickListener() {
+    private final AdapterView.OnItemClickListener CustDipilih= new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             if(view.getParent()==lv){

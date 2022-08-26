@@ -19,6 +19,7 @@
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.196" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/drawable/ic_person.xml" value="0.196" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/drawable/spinner_icon.xml" value="0.196" />
+        <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/drawable/textselect.xml" value="0.2985" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_add_category.xml" value="0.18" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_add_customer.xml" value="0.22" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_add_discount.xml" value="0.1" />
@@ -26,18 +27,20 @@
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_list_category.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_list_customer.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_list_discount.xml" value="0.1" />
+        <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_pay.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_product.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/activity_receipt.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/app_bar_main.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/fragment_pos.xml" value="0.16336633663366337" />
+        <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/list_menu.xml" value="0.18" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/nav_header_main.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/row_category.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/row_customer.xml" value="0.16916488222698073" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/row_detail_history.xml" value="0.25" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/row_discount.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/row_history.xml" value="0.1" />
-        <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/row_list.xml" value="0.1" />
+        <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/layout/row_list.xml" value="0.22" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/menu/category.xml" value="0.18" />
         <entry key="..\:/Nafis/Work_Data/AppMobile/pos-resto/app/src/main/res/menu/customer.xml" value="0.1" />
@@ -50,7 +53,6 @@
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/POSRESTOKASIR/app/src/main/res/layout/fragment_slideshow.xml" value="0.1" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/POSRESTOKASIR/app/src/main/res/layout/nav_header_main.xml" value="0.1" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/POSRESTOKASIR/app/src/main/res/layout/splash_activity.xml" value="0.1" />
-        <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/drawable/buttonselect.xml" value="0.162" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/drawable/edit_off_select.xml" value="0.1785" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/drawable/edit_select.xml" value="0.1785" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/drawable/ic_add_box_black.xml" value="0.1785" />
@@ -69,37 +71,26 @@
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/drawable/icon_select.xml" value="0.1785" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/drawable/selector_bg_button.xml" value="0.1785" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/drawable/selector_bg_button2.xml" value="0.1785" />
-        <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/drawable/selector_bg_button3.xml" value="0.1" />
-        <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/drawable/selector_bg_button_mod.xml" value="0.1" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/drawable/selector_bg_edittext.xml" value="0.1785" />
-        <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/drawable/selector_bg_edittext_mod.xml" value="0.1" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/drawable/spinner_icon.xml" value="0.1785" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/drawable/textselect.xml" value="0.1785" />
-        <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/activity_add_category.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/activity_add_discount.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/activity_detail_history.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/activity_discount.xml" value="0.22" />
-        <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/activity_list_category.xml" value="0.1" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/activity_list_discount.xml" value="0.14666666666666667" />
-        <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/activity_login.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/activity_main.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/activity_pay.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/activity_product.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/activity_receipt.xml" value="0.12" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/content_main.xml" value="0.14130434782608695" />
-        <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/dialog_variant_modifier.xml" value="0.1" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/fragment_history.xml" value="0.2816326530612245" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/fragment_pos.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/list_menu.xml" value="0.1" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/nav_header_main.xml" value="0.14130434782608695" />
-        <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/row_category.xml" value="0.1" />
-        <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/row_customer.xml" value="0.1" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/row_detail_history.xml" value="0.1" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/row_discount.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/row_history.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/row_list.xml" value="0.1" />
-        <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/row_modifier.xml" value="0.4466666666666667" />
-        <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/row_variant.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/row_history.xml" value="0.22" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/spinner_dropdown_item.xml" value="0.1" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/spinner_item.xml" value="0.1" />
         <entry key="..\:/Users/SPI Teknis/AndroidStudioProjects/pos-resto/app/src/main/res/layout/toolbar_default.xml" value="0.14130434782608695" />

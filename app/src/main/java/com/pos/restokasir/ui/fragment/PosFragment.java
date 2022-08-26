@@ -91,6 +91,15 @@ public class PosFragment extends Fragment {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.metode, R.layout.spinner_item);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        Cari_Produk();
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    }
+                });
 
         tableList = binding.tbllist;
         tableTotal = binding.tbltotal;
@@ -149,9 +158,10 @@ public class PosFragment extends Fragment {
             ((TextView)v.findViewById(R.id.col1)).setTextColor(getResources().getColor(R.color.darkgrey));
             ((TextView)v.findViewById(R.id.col2)).setText("");
             Hrg= dt.getInt("totalsubtotal");
-            ((TextView)v.findViewById(R.id.col3)).setText("Rp."+formatter.format(Hrg));
+            ((TextView)v.findViewById(R.id.col3)).setText("Rp"+formatter.format(Hrg));
             ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
             ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.darkgrey));
+            ((TextView)v.findViewById(R.id.txtX)).setVisibility(View.GONE);
             tableTotal.addView(v);
         } catch (JSONException ignored) {}
 
@@ -163,9 +173,10 @@ public class PosFragment extends Fragment {
             ((TextView)v.findViewById(R.id.col1)).setTextColor(getResources().getColor(R.color.grey_200));
             ((TextView)v.findViewById(R.id.col2)).setText("");
             Hrg= dt.getInt("totaldisc");
-            ((TextView)v.findViewById(R.id.col3)).setText("Rp."+formatter.format(Hrg));
+            ((TextView)v.findViewById(R.id.col3)).setText("Rp"+formatter.format(Hrg));
             ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Small);
             ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.grey_200));
+            ((TextView)v.findViewById(R.id.txtX)).setVisibility(View.GONE);
             tableTotal.addView(v);
         } catch (JSONException ignored) {}
 
@@ -177,9 +188,10 @@ public class PosFragment extends Fragment {
             ((TextView)v.findViewById(R.id.col1)).setTextColor(getResources().getColor(R.color.grey_200));
             ((TextView)v.findViewById(R.id.col2)).setText("");
             Hrg= dt.getInt("totaltax");
-            ((TextView)v.findViewById(R.id.col3)).setText("Rp."+formatter.format(Hrg));
+            ((TextView)v.findViewById(R.id.col3)).setText("Rp"+formatter.format(Hrg));
             ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Small);
             ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.grey_200));
+            ((TextView)v.findViewById(R.id.txtX)).setVisibility(View.GONE);
             tableTotal.addView(v);
         } catch (JSONException ignored) {}
 
@@ -191,11 +203,12 @@ public class PosFragment extends Fragment {
             ((TextView)v.findViewById(R.id.col1)).setTextColor(getResources().getColor(R.color.darkgrey));
             ((TextView)v.findViewById(R.id.col2)).setText("");
             Hrg= dt.getInt("total");
-            String Hsl="Rp."+formatter.format(Hrg);
+            String Hsl="Rp"+formatter.format(Hrg);
             btnpay.setText(Hsl);
             ((TextView)v.findViewById(R.id.col3)).setText(Hsl);
             ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
             ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.darkgrey));
+            ((TextView)v.findViewById(R.id.txtX)).setVisibility(View.GONE);
             tableTotal.addView(v);
         } catch (JSONException ignored) {}
     }
@@ -286,7 +299,7 @@ public class PosFragment extends Fragment {
                         @SuppressLint("UseCompatLoadingForDrawables") final NavigationItem Isi = NavigationItem.BuatItem(Prd.getJSONObject(i),
                                 getResources().getDrawable(R.drawable.food)
                         );
-                        Isi.Data.put("JnsHrg",spinner.getSelectedItemPosition());
+                        Isi.Data.put("JnsHrg", KodePriceTipe());
                         trxAdapter.add(Isi);
                     }
                     Runnable UpdateUI= () -> gvMenu.setAdapter(trxAdapter);
@@ -393,7 +406,7 @@ public class PosFragment extends Fragment {
     private void UpdateCartMin(@NonNull JSONObject dt){
         Log.d(TAG,"Kurangi Qty Cart: "+ dt);
         try{
-            ReqApiServices X =  new ReqApiServices();
+            ReqApiServices X = new ReqApiServices();
             X.EventWhenRespon=Jwban2;
             X.SetAwal();
             X.urlBuilder.addPathSegments("cart/update");
