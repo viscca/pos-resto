@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.pos.restokasir.R;
 import com.pos.restokasir.Service.ReqApiServices;
@@ -50,12 +49,7 @@ public class LoginActivity extends Activity {
         @Override
         public void OnSukses(ReqApiServices tool, JSONObject Data) {
             try {
-                String code=Data.getString("code");
-                if(code.equals("97")){
-                    code=Data.getJSONObject("message").getString("error");
-                    Log.d(TAG,code);
-                    BuatToast(code);
-                }else if(code.equals("00")){
+                if(Data.getString("code").equals("00")){
                     final JSONObject User= Data.getJSONObject("message").getJSONObject("user");
                     DB_Setting.add("HashUser",User.getString("user_key"));
                     SharedPreferences.Editor Ubah = DB_Setting.EditorPref();
@@ -73,16 +67,6 @@ public class LoginActivity extends Activity {
 
         }
     };
-
-    private void BuatToast(String Txt){
-        Runnable UpdateUI = new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(LoginActivity.this, Txt, Toast.LENGTH_LONG ).show();
-            }
-        };
-        runOnUiThread(UpdateUI);
-    }
 
     private final View.OnClickListener DiKlik= new View.OnClickListener() {
         @Override
