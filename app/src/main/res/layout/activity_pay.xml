@@ -56,19 +56,25 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/darkgrey" />
 
-                    <RadioButton
-                        android:id="@+id/rb1"
+                    <RadioGroup
+                        android:id="@+id/opsiTunai"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="Rp30.000" />
+                        android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/rb2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="Rp50.000" />
+                        <RadioButton
+                            android:id="@+id/rb1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp30.000" />
+
+                        <RadioButton
+                            android:id="@+id/rb2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:text="Rp50.000" />
+                    </RadioGroup>
                 </TableRow>
 
                 <TableRow
