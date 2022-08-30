@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight=".2"
+        android:gravity="center_vertical"
         android:text=""
         android:textColor="@color/darkgrey" />
 
@@ -21,8 +22,8 @@
         android:id="@+id/col2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight=".4"
-        android:gravity="end"
+        android:layout_weight=".3"
+        android:gravity="center_vertical|end"
         android:text=""
         android:textColor="@color/darkgrey" />
 
@@ -31,8 +32,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight=".3"
-        android:gravity="end"
+        android:gravity="center_vertical|end"
         android:text=""
         android:textColor="@color/darkgrey" />
+
+    <TextView
+        android:id="@+id/txtX"
+        style="@style/TextKlik"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/dimens_5dp"
+        android:layout_weight=".3"
+        android:gravity="center_vertical|end"
+        android:text="X"
+        android:textColor="@color/red" />
 
 </TableRow>

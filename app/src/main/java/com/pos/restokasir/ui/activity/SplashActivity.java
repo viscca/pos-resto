@@ -95,7 +95,9 @@ public class SplashActivity extends Activity {
                     Ubah.apply();
                     //---------------
                     Intent newIntent = new Intent(SplashActivity.this, MainActivity.class);
+                    newIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(newIntent);
+                    overridePendingTransition(0, 0);
                 }
                 return;
             } catch (JSONException ignored) {}
