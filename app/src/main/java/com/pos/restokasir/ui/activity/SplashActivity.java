@@ -7,11 +7,9 @@ import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Display;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -25,10 +23,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.FormBody;
-import okhttp3.Response;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends Activity {
@@ -103,7 +98,7 @@ public class SplashActivity extends Activity {
                     startActivity(newIntent);
                 }
                 return;
-            } catch (JSONException e) {}
+            } catch (JSONException ignored) {}
             goPageLogin();
         }
 
