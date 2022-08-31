@@ -60,9 +60,10 @@ public class LoginActivity extends Activity {
                     Ubah.apply();
                     //---------------
                     Intent newIntent = new Intent(LoginActivity.this, MainActivity.class);
+                    newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(newIntent);
                 }
-            } catch (JSONException e) {}
+            } catch (JSONException ignored) {}
         }
 
         @Override
@@ -72,12 +73,7 @@ public class LoginActivity extends Activity {
     };
 
     private void BuatToast(String Txt){
-        Runnable UpdateUI = new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(LoginActivity.this, Txt, Toast.LENGTH_LONG ).show();
-            }
-        };
+        Runnable UpdateUI = () -> Toast.makeText(LoginActivity.this, Txt, Toast.LENGTH_LONG ).show();
         runOnUiThread(UpdateUI);
     }
 

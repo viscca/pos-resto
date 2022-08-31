@@ -53,7 +53,7 @@ public class PosFragment extends Fragment {
     private FragmentPosBinding binding;
     private TableLayout tableList, tableTotal;
     private Button btnaddcustomer, btnpay, btnproduk, btndiskon, btnkategori;
-    private TextView btnedit, btneditoff;
+//    private TextView btnedit, btneditoff;
     private LinearLayout llEdit;
     private EditText eCari;
     private GridView gvMenu;
@@ -109,10 +109,10 @@ public class PosFragment extends Fragment {
         btnpay = binding.btnpay;
         btnpay.setOnClickListener(DiKlik);
         llEdit = binding.llEdit;
-        btnedit = root.findViewById(R.id.txtedit);
-        btnedit.setOnClickListener(DiKlik);
-        btneditoff = root.findViewById(R.id.txteditoff);
-        btneditoff.setOnClickListener(DiKlik);
+//        btnedit = root.findViewById(R.id.txtedit);
+//        btnedit.setOnClickListener(DiKlik);
+//        btneditoff = root.findViewById(R.id.txteditoff);
+//        btneditoff.setOnClickListener(DiKlik);
         btnproduk = binding.btnaddproduct;
         btnproduk.setOnClickListener(DiKlik);
         btndiskon = binding.btnadddisc;
@@ -125,8 +125,8 @@ public class PosFragment extends Fragment {
     public void onResume() {
         super.onResume();
         llEdit.setVisibility(View.GONE);
-        btnedit.setVisibility(View.VISIBLE);
-        btneditoff.setVisibility(View.GONE);
+//        btnedit.setVisibility(View.VISIBLE);
+//        btneditoff.setVisibility(View.GONE);
         SetNoTrxID();
         LoadChart();
         Cari_Produk();
@@ -161,7 +161,7 @@ public class PosFragment extends Fragment {
             ((TextView)v.findViewById(R.id.col3)).setText("Rp"+formatter.format(Hrg));
             ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
             ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.darkgrey));
-            ((TextView)v.findViewById(R.id.txtX)).setVisibility(View.GONE);
+            v.findViewById(R.id.txtX).setVisibility(View.GONE);
             tableTotal.addView(v);
         } catch (JSONException ignored) {}
 
@@ -176,7 +176,7 @@ public class PosFragment extends Fragment {
             ((TextView)v.findViewById(R.id.col3)).setText("Rp"+formatter.format(Hrg));
             ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Small);
             ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.grey_200));
-            ((TextView)v.findViewById(R.id.txtX)).setVisibility(View.GONE);
+            v.findViewById(R.id.txtX).setVisibility(View.GONE);
             tableTotal.addView(v);
         } catch (JSONException ignored) {}
 
@@ -191,7 +191,7 @@ public class PosFragment extends Fragment {
             ((TextView)v.findViewById(R.id.col3)).setText("Rp"+formatter.format(Hrg));
             ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Small);
             ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.grey_200));
-            ((TextView)v.findViewById(R.id.txtX)).setVisibility(View.GONE);
+            v.findViewById(R.id.txtX).setVisibility(View.GONE);
             tableTotal.addView(v);
         } catch (JSONException ignored) {}
 
@@ -208,7 +208,7 @@ public class PosFragment extends Fragment {
             ((TextView)v.findViewById(R.id.col3)).setText(Hsl);
             ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
             ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.darkgrey));
-            ((TextView)v.findViewById(R.id.txtX)).setVisibility(View.GONE);
+            v.findViewById(R.id.txtX).setVisibility(View.GONE);
             tableTotal.addView(v);
         } catch (JSONException ignored) {}
     }
@@ -224,14 +224,14 @@ public class PosFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), PayActivity.class);
                 startActivity(intent);
                 requireActivity().overridePendingTransition(0, 0);
-            } else if (v==btnedit) {
-                llEdit.setVisibility(View.VISIBLE);
-                btnedit.setVisibility(View.GONE);
-                btneditoff.setVisibility(View.VISIBLE);
-            } else if (v==btneditoff) {
-                llEdit.setVisibility(View.GONE);
-                btnedit.setVisibility(View.VISIBLE);
-                btneditoff.setVisibility(View.GONE);
+//            } else if (v==btnedit) {
+//                llEdit.setVisibility(View.VISIBLE);
+//                btnedit.setVisibility(View.GONE);
+//                btneditoff.setVisibility(View.VISIBLE);
+//            } else if (v==btneditoff) {
+//                llEdit.setVisibility(View.GONE);
+//                btnedit.setVisibility(View.VISIBLE);
+//                btneditoff.setVisibility(View.GONE);
             } else if (v==btnproduk) {
                 Intent intent = new Intent(getActivity(), ProductActivity.class);
                 startActivity(intent);

@@ -1,22 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.InventoryFragment">
+    android:orientation="vertical"
+    tools:context=".ui.fragment.HistoryFragment">
 
     <TextView
-        android:id="@+id/textsetting"
+        android:id="@+id/txtNama"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginTop="@dimen/dimens_10dp"
+        android:gravity="center"
+        android:text="Nama User"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/darkgrey"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/txtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_5dp"
+        android:gravity="center"
+        android:text="Email"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/grey_200"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/txtOutlet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_5dp"
+        android:layout_marginBottom="@dimen/dimens_10dp"
+        android:gravity="center"
+        android:text="Outlet"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/grey_200"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/txtHrd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_15dp"
+        android:paddingStart="@dimen/dimens_15dp"
+        android:paddingEnd="@dimen/dimens_15dp"
+        android:paddingTop="@dimen/dimens_5dp"
+        android:paddingBottom="@dimen/dimens_5dp"
+        android:text="HARDWARE"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:background="@color/grey"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@color/grey"
+        android:dividerHeight="@dimen/dimens_1dp"
+        android:fadingEdge="vertical"
+        android:fadingEdgeLength="10dp"
+        android:requiresFadingEdge="vertical" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnlogout"
+        style="@style/Button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:paddingTop="@dimen/dimens_10dp"
+        android:paddingBottom="@dimen/dimens_10dp"
+        android:text="LOGOUT"
+        android:textAllCaps="false"
+        android:textAppearance="?android:attr/textAppearanceButton"
+        android:textSize="@dimen/text_24sp"
+        android:textStyle="bold" />
+</LinearLayout>

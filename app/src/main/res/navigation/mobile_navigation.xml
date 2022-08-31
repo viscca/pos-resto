@@ -17,11 +17,11 @@
         android:label="@string/menu_history"
         tools:layout="@layout/fragment_history" />
 
-    <fragment
-        android:id="@+id/nav_inventory"
-        android:name="com.pos.restokasir.ui.fragment.InventoryFragment"
-        android:label="@string/menu_inventory"
-        tools:layout="@layout/fragment_inventory" />
+<!--    <fragment-->
+<!--        android:id="@+id/nav_inventory"-->
+<!--        android:name="com.pos.restokasir.ui.fragment.InventoryFragment"-->
+<!--        android:label="@string/menu_inventory"-->
+<!--        tools:layout="@layout/fragment_inventory" />-->
 
     <fragment
         android:id="@+id/nav_setting"
