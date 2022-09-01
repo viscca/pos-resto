@@ -26,10 +26,10 @@ public class ModifierAdapter extends ArrayAdapter<NavigationItem> {
         convertView = inflater.inflate(this.layoutResourceId,parent, false);
 
         NavigationItem menu = getItem(position);
-        TextView nama = convertView.findViewById(R.id.txtMod);
-        nama.setText(menu.getKey("nama"));
-        TextView pricenew = convertView.findViewById(R.id.txtPrice);
-        pricenew.setText(menu.getKey("price"));
+        //TextView nama = convertView.findViewById(R.id.txtMod);
+        //nama.setText(menu.getKey("nama"));
+        //TextView pricenew = convertView.findViewById(R.id.txtPrice);
+        //pricenew.setText(menu.getKey("price"));
 
         return convertView;
     }

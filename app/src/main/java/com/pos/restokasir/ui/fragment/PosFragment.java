@@ -59,6 +59,7 @@ public class PosFragment extends Fragment {
     private GridView gvMenu;
     private Spinner spinner;
     private SharedPreferences mSettings;
+    private VariantModifierDialog dlgVarMod;
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -94,6 +95,7 @@ public class PosFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
+                        Log.d(TAG,"Pilih Spiner");
                         Cari_Produk();
                     }
 
@@ -129,7 +131,6 @@ public class PosFragment extends Fragment {
 //        btneditoff.setVisibility(View.GONE);
         SetNoTrxID();
         LoadChart();
-        Cari_Produk();
     }
 
     private void SetNoTrxID(){
@@ -213,17 +214,15 @@ public class PosFragment extends Fragment {
         } catch (JSONException ignored) {}
     }
 
-    private final View.OnClickListener DiKlik= new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (v==btnaddcustomer) {
-                Intent intent = new Intent(getActivity(), ListCustomerActivity.class);
-                startActivity(intent);
-                requireActivity().overridePendingTransition(0, 0);
-            } else if (v==btnpay) {
-                Intent intent = new Intent(getActivity(), PayActivity.class);
-                startActivity(intent);
-                requireActivity().overridePendingTransition(0, 0);
+    private final View.OnClickListener DiKlik= v-> {
+        if (v==btnaddcustomer) {
+            Intent intent = new Intent(getActivity(), ListCustomerActivity.class);
+            startActivity(intent);
+            requireActivity().overridePendingTransition(0, 0);
+        } else if (v==btnpay) {
+            Intent intent = new Intent(getActivity(), PayActivity.class);
+            startActivity(intent);
+            requireActivity().overridePendingTransition(0, 0);
 //            } else if (v==btnedit) {
 //                llEdit.setVisibility(View.VISIBLE);
 //                btnedit.setVisibility(View.GONE);
@@ -232,19 +231,20 @@ public class PosFragment extends Fragment {
 //                llEdit.setVisibility(View.GONE);
 //                btnedit.setVisibility(View.VISIBLE);
 //                btneditoff.setVisibility(View.GONE);
-            } else if (v==btnproduk) {
-                Intent intent = new Intent(getActivity(), ProductActivity.class);
-                startActivity(intent);
-                requireActivity().overridePendingTransition(0, 0);
-            } else if (v==btndiskon) {
-                Intent intent = new Intent(getActivity(), ListDiscountActivity.class);
-                startActivity(intent);
-                requireActivity().overridePendingTransition(0, 0);
-            } else if (v==btnkategori) {
-                Intent intent = new Intent(getActivity(), ListCategoryActivity.class);
-                startActivity(intent);
-                requireActivity().overridePendingTransition(0, 0);
-            }
+        } else if (v==btnproduk) {
+            Intent intent = new Intent(getActivity(), ProductActivity.class);
+            startActivity(intent);
+            requireActivity().overridePendingTransition(0, 0);
+        } else if (v==btndiskon) {
+            Intent intent = new Intent(getActivity(), ListDiscountActivity.class);
+            startActivity(intent);
+            requireActivity().overridePendingTransition(0, 0);
+        } else if (v==btnkategori) {
+            Intent intent = new Intent(getActivity(), ListCategoryActivity.class);
+            startActivity(intent);
+            requireActivity().overridePendingTransition(0, 0);
+        } else if (v==dlgVarMod.btnPilih) {
+            Log.d(TAG,"ok DIALOG");
         }
     };
 
@@ -334,27 +334,37 @@ public class PosFragment extends Fragment {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             if(view.getParent()==gvMenu){
                 NavigationItem item = (NavigationItem) parent.getAdapter().getItem(position);
-                ReqApiServices X =  new ReqApiServices();
-                X.KodePath=25;
-                X.EventWhenRespon=Jwban2;
-                X.SetAwal();
-                X.urlBuilder.addPathSegments("cart/add");
-                X.SetAwalRequest();
-                X.request.header("Apphash", MainActivity.ObjIni.DB_Setting.get_Key("HashUser"));
-                RequestBody Body = new FormBody.Builder()
-                        .add("trxid",""+mSettings.getInt("NoTrx",0))
-                        .add("modifier_id","")
-                        .add("note","")
-                        .add("product_id",item.getKey("code"))
-                        .add("pricetype",KodePriceTipe())
-                        .add("qty","1")
-                        .build();
-                X.request.post(Body);
-                X.HitNoWait();
-                Log.d(TAG,"Milih:"+item.getKey("code"));
-            }
+                dlgVarMod= new VariantModifierDialog(item.Data,MainActivity.ObjIni);
+                dlgVarMod.OnPilih= DiKlik;
+                dlgVarMod.show();
+                Log.d(TAG,"Pilih: "+item.Data.toString());
+             }
         }
     };
+
+    private void addToCart(@NonNull JSONObject dt){
+        try {
+            String Code = dt.getString("code");
+            ReqApiServices X =  new ReqApiServices();
+            X.KodePath=25;
+            X.EventWhenRespon=Jwban2;
+            X.SetAwal();
+            X.urlBuilder.addPathSegments("cart/add");
+            X.SetAwalRequest();
+            X.request.header("Apphash", MainActivity.ObjIni.DB_Setting.get_Key("HashUser"));
+            RequestBody Body = new FormBody.Builder()
+                    .add("trxid",""+mSettings.getInt("NoTrx",0))
+                    .add("modifier_id","")
+                    .add("note","")
+                    .add("product_id", Code)
+                    .add("pricetype",KodePriceTipe())
+                    .add("qty","1")
+                    .build();
+            X.request.post(Body);
+            X.HitNoWait();
+            Log.d(TAG,"Milih: "+Code);
+        } catch (JSONException ignored) {}
+    }
 
     private final TerimaResponApi Jwban2 = new TerimaResponApi() {
         @Override
@@ -368,7 +378,6 @@ public class PosFragment extends Fragment {
                 if (Data.getString("code").equals("00")) {
                     final JSONObject dt= Data.getJSONObject("message").getJSONObject("cart  ");
                     final JSONArray cart= dt.getJSONArray("cart");
-                    Log.d(TAG,"Sukses Load Cart. "+tool.KodePath);
                     Runnable UpdateUI = () -> {
                         InsertRow(cart);
                         InsertTotal(dt);
@@ -382,7 +391,6 @@ public class PosFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void InsertRow(@NonNull JSONArray dt){
-        Log.d(TAG,"DataCart "+ dt);
         tableList.removeAllViews();
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         Integer Hrg;
@@ -426,7 +434,7 @@ public class PosFragment extends Fragment {
     }
 
     private void ShowDialogVarMod() {
-        VariantModifierDialog dlgVarMod = new VariantModifierDialog(requireActivity());
+         //= new VariantModifierDialog(requireActivity());
         dlgVarMod.show();
     }
 

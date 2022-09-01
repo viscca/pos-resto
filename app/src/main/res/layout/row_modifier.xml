@@ -1,76 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tr_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:baselineAligned="false">
+    android:background="@color/white"
+    android:paddingTop="@dimen/dimens_2dp"
+    android:paddingStart="@dimen/dimens_5dp"
+    android:paddingEnd="@dimen/dimens_5dp">
 
-    <RelativeLayout
+    <CheckBox
+        android:id="@+id/cb1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimens_15dp"
-        android:layout_marginTop="@dimen/dimens_15dp"
-        android:layout_marginBottom="@dimen/dimens_15dp"
-        android:layout_weight=".60">
+        android:layout_height="match_parent"
+        android:layout_weight=".3"
+        android:text="Ayam Goreng" />
 
-        <TextView
-            android:id="@+id/txtMod"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Es Jeruk"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtMod"
-            android:text="Rp10.000"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/grey_200" />
-    </RelativeLayout>
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/col1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight=".40"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_weight=".7"
+        android:gravity="center_vertical|end"
+        android:text=""
+        android:textColor="@color/darkgrey" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnMinus"
-            style="@style/Button2"
-            android:layout_width="@dimen/dimens_40dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="-"
-            android:textAppearance="?android:attr/textAppearanceButton"
-            android:textSize="@dimen/text_24sp" />
 
-        <EditText
-            android:id="@+id/eNilai"
-            style="@style/MyEditTextMod"
-            android:layout_width="@dimen/dimens_80dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:autofillHints=""
-            android:hint="0"
-            android:inputType="number"
-            android:singleLine="true"
-            android:textAlignment="center"
-            android:textColor="@color/black" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnPlus"
-            style="@style/Button2"
-            android:layout_width="@dimen/dimens_40dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/dimens_15dp"
-            android:text="+"
-            android:textAppearance="?android:attr/textAppearanceButton"
-            android:textSize="@dimen/text_24sp" />
-    </LinearLayout>
-</LinearLayout>
+</TableRow>
