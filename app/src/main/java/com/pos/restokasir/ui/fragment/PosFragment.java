@@ -244,7 +244,7 @@ public class PosFragment extends Fragment {
             startActivity(intent);
             requireActivity().overridePendingTransition(0, 0);
         } else if (v==dlgVarMod.btnPilih) {
-            Log.d(TAG,"ok DIALOG");
+            addToCart();
         }
     };
 
@@ -342,9 +342,11 @@ public class PosFragment extends Fragment {
         }
     };
 
-    private void addToCart(@NonNull JSONObject dt){
+    private void addToCart(){
+        final JSONObject dt = dlgVarMod.Hasil;
+        Log.d(TAG,"Hasil:"+dt.toString());
         try {
-            String Code = dt.getString("code");
+            String Code = dt.getString("id");
             ReqApiServices X =  new ReqApiServices();
             X.KodePath=25;
             X.EventWhenRespon=Jwban2;
@@ -354,15 +356,14 @@ public class PosFragment extends Fragment {
             X.request.header("Apphash", MainActivity.ObjIni.DB_Setting.get_Key("HashUser"));
             RequestBody Body = new FormBody.Builder()
                     .add("trxid",""+mSettings.getInt("NoTrx",0))
-                    .add("modifier_id","")
-                    .add("note","")
+                    .add("modifier_id", dt.getString("modifier_id"))
+                    .add("note", dt.getString("note"))
                     .add("product_id", Code)
                     .add("pricetype",KodePriceTipe())
-                    .add("qty","1")
+                    .add("qty",""+dt.getInt("qty"))
                     .build();
             X.request.post(Body);
             X.HitNoWait();
-            Log.d(TAG,"Milih: "+Code);
         } catch (JSONException ignored) {}
     }
 
@@ -403,30 +404,27 @@ public class PosFragment extends Fragment {
                 Obj.setText(Isi.getString("product"));
                 Hrg= Isi.getInt("qty");
                 Obj=v.findViewById(R.id.col2);Obj.setText("x"+Hrg);
-                Obj.setOnClickListener(view -> UpdateCartMin(Isi));
                 Hrg= Isi.getInt("total");
                 Obj=v.findViewById(R.id.col3);Obj.setText("Rp"+formatter.format(Hrg));
+                Obj=v.findViewById(R.id.txtX);
+                Obj.setOnClickListener(view -> HapusCartMin(Isi));
                 tableList.addView(v);
             }
         } catch (JSONException ignored) {}
     }
 
-    private void UpdateCartMin(@NonNull JSONObject dt){
+    private void HapusCartMin(@NonNull JSONObject dt){
         Log.d(TAG,"Kurangi Qty Cart: "+ dt);
         try{
             ReqApiServices X = new ReqApiServices();
             X.EventWhenRespon=Jwban2;
             X.SetAwal();
-            X.urlBuilder.addPathSegments("cart/update");
+            X.urlBuilder.addPathSegments("cart/delete");
             X.SetAwalRequest();
             X.request.header("Apphash", MainActivity.ObjIni.DB_Setting.get_Key("HashUser"));
             RequestBody Body = new FormBody.Builder()
                     .add("trxid",""+mSettings.getInt("NoTrx",0))
-                    .add("modifier_id","")
-                    .add("note",dt.getString("note"))
-                    .add("product_id",dt.getString("product_id"))
-                    .add("pricetype",KodePriceTipe())
-                    .add("qty","-1")
+                    .add("cart_id",""+dt.getInt("id"))
                     .build();
             X.request.post(Body);
             X.HitNoWait();

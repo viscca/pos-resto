@@ -186,7 +186,6 @@ public class VariantModifierDialog extends Dialog {
         } catch (JSONException ignored) {}
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         ((TextView) findViewById(R.id.txtTotal)).setText("Total Harga Rp"+formatter.format(Byr));
-        Log.d(TAG,"Hasil:"+Hasil.toString());
     }
 
     private final View.OnClickListener DiKlik= v-> {
@@ -194,6 +193,7 @@ public class VariantModifierDialog extends Dialog {
             try{
                 Hasil.getInt("qty");
                 Hasil.getString("id");
+                Hasil.put("note", ((EditText)findViewById(R.id.eNote)).getText().toString());
                 dismiss();
                 OnPilih.onClick(v);
             } catch (JSONException ignored) {
