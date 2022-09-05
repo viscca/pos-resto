@@ -204,9 +204,8 @@ public class PosFragment extends Fragment {
             ((TextView)v.findViewById(R.id.col1)).setTextColor(getResources().getColor(R.color.darkgrey));
             ((TextView)v.findViewById(R.id.col2)).setText("");
             Hrg= dt.getInt("total");
-            String Hsl="Rp"+formatter.format(Hrg);
-            btnpay.setText(Hsl);
-            ((TextView)v.findViewById(R.id.col3)).setText(Hsl);
+            SetHarga_BtnPay(Hrg);
+            ((TextView)v.findViewById(R.id.col3)).setText("Rp"+formatter.format(Hrg));
             ((TextView)v.findViewById(R.id.col3)).setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
             ((TextView)v.findViewById(R.id.col3)).setTextColor(getResources().getColor(R.color.darkgrey));
             v.findViewById(R.id.txtX).setVisibility(View.GONE);
@@ -314,7 +313,19 @@ public class PosFragment extends Fragment {
         }
     };
 
+    private  void SetHarga_BtnPay(double Hrg){
+        final boolean Bisa =Hrg>=0;
+        btnpay.setEnabled(Bisa);
+        String Hsl = "Blm ada yg dibayar";
+        if(Bisa) {
+            DecimalFormat formatter = new DecimalFormat("#,###,###");
+            Hsl = "Bayar Rp" + formatter.format(Hrg);
+        }
+        btnpay.setText(Hsl);
+    }
+
     private void LoadChart(){
+        SetHarga_BtnPay(-1);
         ReqApiServices X =  new ReqApiServices();
         X.EventWhenRespon=Jwban2;
         X.KodePath=5;
@@ -363,6 +374,7 @@ public class PosFragment extends Fragment {
                     .add("qty",""+dt.getInt("qty"))
                     .build();
             X.request.post(Body);
+            SetHarga_BtnPay(-1);
             X.HitNoWait();
         } catch (JSONException ignored) {}
     }
@@ -407,7 +419,7 @@ public class PosFragment extends Fragment {
                 Hrg= Isi.getInt("total");
                 Obj=v.findViewById(R.id.col3);Obj.setText("Rp"+formatter.format(Hrg));
                 Obj=v.findViewById(R.id.txtX);
-                Obj.setOnClickListener(view -> HapusCartMin(Isi));
+                Obj.setOnClickListener(view -> HapusCartMin(   Isi));
                 tableList.addView(v);
             }
         } catch (JSONException ignored) {}

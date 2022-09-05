@@ -6,8 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,8 +38,12 @@ public class PayActivity extends AppCompatActivity {
     private final String TAG="Prs_PaymentAct";
     private C_DB_Setting DB_Setting;
     private Button btnBayar;
+    private Spinner spinner;
     private TextView txtTotal;
     private EditText eJumlah;
+    private JSONArray dtMethod;
+    private Double TotBayar;
+    private LinearLayout ll_Tunai, ll_NonTunai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +58,9 @@ public class PayActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        spinner = findViewById(R.id.spinMethod);
+        ll_Tunai = findViewById(R.id.ll_Tunai);
+        ll_NonTunai = findViewById(R.id.ll_NonTunai);
         txtTotal = findViewById(R.id.txtTotal);
         eJumlah = findViewById(R.id.eJumlah);
         btnBayar = findViewById(R.id.btnbayar);
@@ -58,16 +69,13 @@ public class PayActivity extends AppCompatActivity {
         LoadChart();
     }
 
-
     private void LoadChart(){
         txtTotal.setText("");
         eJumlah.setText("");
-        btnBayar.setEnabled(false);
         ReqApiServices X =  new ReqApiServices();
-        X.EventWhenRespon=Jwban2;
-        X.KodePath=5;
+        X.EventWhenRespon=Jwban1;
         X.SetAwal();
-        X.urlBuilder.addPathSegments("cart/detail");
+        X.urlBuilder.addPathSegments("checkout/bill");
         X.SetAwalRequest();
         X.request.header("Apphash", DB_Setting.get_Key("HashUser"));
         RequestBody Body = new FormBody.Builder()
@@ -77,7 +85,7 @@ public class PayActivity extends AppCompatActivity {
         X.HitNoWait();
     }
 
-    private final TerimaResponApi Jwban2 = new TerimaResponApi() {
+    private final TerimaResponApi Jwban1 = new TerimaResponApi() {
         @Override
         public void onGagal(ReqApiServices tool, IOException e) {
 
@@ -91,9 +99,7 @@ public class PayActivity extends AppCompatActivity {
                     code=Data.getJSONObject("message").getString("error");
                     Log.d(TAG,code);
                 }else if(code.equals("00")){
-                    final JSONObject dt= Data.getJSONObject("message").getJSONObject("cart  ");
-                    final JSONArray cart= dt.getJSONArray("cart");
-                    Log.d(TAG,"Sukses Load Cart. "+tool.KodePath);
+                    final JSONObject dt= Data.getJSONObject("message").getJSONObject("summary");
                     Runnable UpdateUI = new Runnable() {
                         @Override
                         public void run() {
@@ -109,11 +115,11 @@ public class PayActivity extends AppCompatActivity {
     private void InsertTotal(@NonNull JSONObject dt){
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         try{
-            Integer Hrg= dt.getInt("total");
-            String Hsl="Total Bayar Rp."+formatter.format(Hrg);
+            TotBayar = dt.getDouble("total");
+            String Hsl="Total Bayar Rp."+formatter.format(TotBayar);
             txtTotal.setText(Hsl);
-            eJumlah.setText(Hrg.toString());
-            btnBayar.setEnabled(true);
+            eJumlah.setText(TotBayar.toString());
+            getPaymentMenthod();
         } catch (JSONException e) {}
     }
 
@@ -143,4 +149,81 @@ public class PayActivity extends AppCompatActivity {
             }
         }
     };
+
+    private void getPaymentMenthod(){
+        ReqApiServices X =  new ReqApiServices();
+        X.EventWhenRespon=Jwban2;
+        X.KodePath=5;
+        X.SetAwal();
+        X.urlBuilder.addPathSegments("checkout/listpayment");
+        X.SetAwalRequest();
+        X.request.header("Apphash", DB_Setting.get_Key("HashUser"));
+        RequestBody Body = new FormBody.Builder()
+                .add("page","1")
+                .add("name","")
+                .build();
+        X.request.post(Body);
+        X.HitNoWait();
+    }
+
+    private final TerimaResponApi Jwban2 = new TerimaResponApi() {
+        @Override
+        public void onGagal(ReqApiServices tool, IOException e) {
+
+        }
+
+        @Override
+        public void OnSukses(ReqApiServices tool, JSONObject Data) {
+            try {
+                String code=Data.getString("code");
+                if(code.equals("97")){
+                    code=Data.getJSONObject("message").getString("error");
+                    Log.d(TAG,code);
+                }else if(code.equals("00")){
+                    dtMethod = Data.getJSONObject("message").getJSONArray("data");
+                    Runnable UpdateUI = new Runnable() {
+                        @Override
+                        public void run() {
+                            SetSpinner();
+                        }
+                    };
+                    runOnUiThread(UpdateUI);
+                }
+            } catch (JSONException e) {}
+        }
+    };
+
+    private void SetSpinner(){
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this,
+                android.R.layout.simple_spinner_dropdown_item);
+        try {
+            for (int i=0; i < dtMethod.length(); i++) {
+                final JSONObject Isi = dtMethod.getJSONObject(i);
+                adapter.add(Isi.getString("name"));
+            }
+        } catch (JSONException ignored) {}
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(
+                    AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    final JSONObject Isi = dtMethod.getJSONObject(position);
+                    final String sid= Isi.getString("id");
+                    if(sid.equals("1")) {
+                        ll_NonTunai.setVisibility(View.GONE);
+                        ll_Tunai.setVisibility(View.VISIBLE);
+                    }else{
+                        ll_Tunai.setVisibility(View.GONE);
+                        ll_NonTunai.setVisibility(View.VISIBLE);
+                    }
+                    btnBayar.setEnabled(true);
+                } catch (JSONException ignored) {}
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+
 }

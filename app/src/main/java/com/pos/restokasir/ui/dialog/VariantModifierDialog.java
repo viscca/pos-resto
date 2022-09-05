@@ -99,7 +99,8 @@ public class VariantModifierDialog extends Dialog {
             spinner.setVisibility(View.GONE);
             return;
         }
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(getContext(), R.layout.spinner_item);
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(getContext(),
+                android.R.layout.simple_spinner_dropdown_item);
         try {
             for (int i=0; i < dtVariant.length(); i++) {
                 final JSONObject Isi = dtVariant.getJSONObject(i);
@@ -114,9 +115,8 @@ public class VariantModifierDialog extends Dialog {
                 try {
                     final JSONObject Isi = dtVariant.getJSONObject(position);
                     Hasil.put("id", Isi.getString("id"));
+                    HitungBayar();
                 } catch (JSONException ignored) {}
-                Log.d(TAG,"Pilih Spiner");
-
             }
 
             public void onNothingSelected(AdapterView<?> parent) {

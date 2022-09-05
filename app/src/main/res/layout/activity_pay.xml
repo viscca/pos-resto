@@ -36,238 +36,64 @@
                 android:textColor="@color/darkgrey"
                 android:textStyle="bold"
                 android:typeface="sans" />
-
-            <TableLayout
+            <Spinner android:id="@+id/spinMethod"
+                style="@style/MySpinner"
+                android:layout_marginTop="@dimen/dimens_15dp"
+                android:layout_marginBottom="@dimen/dimens_15dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/dimens_20dp">
+                android:layout_height="@dimen/dimens_40dp"
+                android:spinnerMode="dropdown"/>
 
-                <TableRow
+            <LinearLayout
+                android:id="@+id/ll_Tunai"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/txtTunai"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:text="Tunai"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/darkgrey" />
-
-                    <RadioGroup
-                        android:id="@+id/opsiTunai"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/rb1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rp30.000" />
-
-                        <RadioButton
-                            android:id="@+id/rb2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="30dp"
-                            android:text="Rp50.000" />
-                    </RadioGroup>
-                </TableRow>
-
-                <TableRow
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="Jumlah Tunai" />
+                <EditText
+                    android:id="@+id/eJumlah"
+                    style="@style/MyEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/dimens_30dp"
+                    android:autofillHints=""
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColor="@color/black" />
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text=""
-                        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                    <EditText
-                        android:id="@+id/eJumlah"
-                        style="@style/MyEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:layout_span="2"
-                        android:autofillHints=""
-                        android:hint="Rp22.600"
-                        android:inputType="number"
-                        android:singleLine="true"
-                        android:textColor="@color/black" />
-                </TableRow>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/dimens_10dp"
-                    android:layout_marginBottom="@dimen/dimens_10dp"
-                    android:background="@color/grey" />
-
-                <TableRow
+            <LinearLayout
+                android:id="@+id/ll_NonTunai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="horizontal">
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/txtEDC"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/dimens_50dp"
-                        android:gravity="center_vertical"
-                        android:text="EDC"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/darkgrey" />
-
-                    <RadioButton
-                        android:id="@+id/rbBCA"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="BCA" />
-
-                    <RadioButton
-                        android:id="@+id/rbMDR"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="Mandiri" />
-                </TableRow>
-
-                <TableRow
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="Catatan" />
+                <EditText
+                    android:id="@+id/eNote"
+                    style="@style/MyEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/dimens_30dp"
+                    android:hint="Catatan ..."
+                    android:singleLine="true"
+                    android:textColor="@color/black" />
 
-                    <TextView
-                        android:id="@+id/txt1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/dimens_50dp"
-                        android:gravity="center_vertical"
-                        android:text=""
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/darkgrey" />
+            </LinearLayout>
 
-                    <RadioButton
-                        android:id="@+id/rbBRI"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="BRI" />
-
-                    <RadioButton
-                        android:id="@+id/rbBNI"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="BNI" />
-                </TableRow>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/dimens_10dp"
-                    android:layout_marginBottom="@dimen/dimens_10dp"
-                    android:background="@color/grey" />
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/txtLain"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/dimens_50dp"
-                        android:gravity="center_vertical"
-                        android:text="Lainnya"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/darkgrey" />
-
-                    <RadioButton
-                        android:id="@+id/rbShopeepay"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="Shopeepay" />
-
-                    <RadioButton
-                        android:id="@+id/rbGopay"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="Gopay" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/txt2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/dimens_50dp"
-                        android:gravity="center_vertical"
-                        android:text=""
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/darkgrey" />
-
-                    <RadioButton
-                        android:id="@+id/rbOvo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="Ovo" />
-
-                    <RadioButton
-                        android:id="@+id/rbDana"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:text="Dana" />
-                </TableRow>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/dimens_10dp"
-                    android:layout_marginBottom="@dimen/dimens_10dp"
-                    android:background="@color/grey" />
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text=""
-                        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                    <EditText
-                        android:id="@+id/eCatatan"
-                        style="@style/MyEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_30dp"
-                        android:layout_span="2"
-                        android:autofillHints=""
-                        android:hint="Catatan Tambahan"
-                        android:inputType="textVisiblePassword"
-                        android:singleLine="true"
-                        android:textColor="@color/black" />
-                </TableRow>
-            </TableLayout>
         </LinearLayout>
     </ScrollView>
 
@@ -287,6 +113,7 @@
             style="@style/Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:text="Bayar"
             android:textAppearance="?android:attr/textAppearanceButton" />
     </LinearLayout>

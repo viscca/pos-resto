@@ -174,7 +174,6 @@
             style="@style/Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bayar Rp22.600"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton" />
     </LinearLayout>
