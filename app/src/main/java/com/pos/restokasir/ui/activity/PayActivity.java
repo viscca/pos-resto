@@ -22,6 +22,7 @@ import com.pos.restokasir.R;
 import com.pos.restokasir.Service.ReqApiServices;
 import com.pos.restokasir.Service.TerimaResponApi;
 import com.pos.restokasir.db_sqlite.C_DB_Setting;
+import com.pos.restokasir.ui.dialog.FindCustomerDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,10 +41,12 @@ public class PayActivity extends AppCompatActivity {
     private Button btnBayar;
     private Spinner spinner;
     private TextView txtTotal;
-    private EditText eJumlah;
+    private EditText eJumlah, eCariCust;
     private JSONArray dtMethod;
     private Double TotBayar;
     private LinearLayout ll_Tunai, ll_NonTunai;
+    private FindCustomerDialog dlgCust;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +66,15 @@ public class PayActivity extends AppCompatActivity {
         ll_NonTunai = findViewById(R.id.ll_NonTunai);
         txtTotal = findViewById(R.id.txtTotal);
         eJumlah = findViewById(R.id.eJumlah);
+        eCariCust = findViewById(R.id.eCariCust);
+        eCariCust.setOnClickListener(DiKlik);
         btnBayar = findViewById(R.id.btnbayar);
         btnBayar.setOnClickListener(DiKlik);
         DB_Setting = new C_DB_Setting(this);
         LoadChart();
+        dlgCust= new FindCustomerDialog(this);
+        dlgCust.OnPilih= DiKlik;
+        dlgCust.DB_Setting=DB_Setting;
     }
 
     private void LoadChart(){
@@ -142,10 +150,15 @@ public class PayActivity extends AppCompatActivity {
     private final View.OnClickListener DiKlik= new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (v==btnBayar) {
-                Intent intent = new Intent(PayActivity.this, ReceiptActivity.class);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
+            if (v==eCariCust) {
+                dlgCust.show();
+            }else if (v==btnBayar) {
+                goBayar();
+            }else if (v==dlgCust.btnPilih){
+                try{
+                    eCariCust.setText(dlgCust.Hasil.getString("name"));
+                    getPaymentMenthod();
+                } catch (JSONException e) {}
             }
         }
     };
@@ -214,6 +227,7 @@ public class PayActivity extends AppCompatActivity {
                         ll_NonTunai.setVisibility(View.GONE);
                         ll_Tunai.setVisibility(View.VISIBLE);
                     }else{
+                        eJumlah.setText(TotBayar.toString());
                         ll_Tunai.setVisibility(View.GONE);
                         ll_NonTunai.setVisibility(View.VISIBLE);
                     }
@@ -225,5 +239,49 @@ public class PayActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void goBayar(){
+        ReqApiServices X =  new ReqApiServices();
+        X.EventWhenRespon=Jwban3;
+        X.SetAwal();
+        X.urlBuilder.addPathSegments("checkout/pay");
+        X.SetAwalRequest();
+        X.request.header("Apphash", DB_Setting.get_Key("HashUser"));
+        FormBody.Builder Body = new FormBody.Builder()
+                .add("trxid",""+DB_Setting.mSettings.getInt("NoTrx",0));
+        try {
+            final JSONObject Isi = dtMethod.getJSONObject(spinner.getSelectedItemPosition());
+            Body.add("paymethod",Isi.getString("id"))
+                .add("totalpayment",eJumlah.getText().toString());
+            Body.add("customer_id",dlgCust.Hasil.getString("id"));
+            X.request.post(Body.build());
+            X.HitNoWait();
+        } catch (JSONException ignored) {}
+    }
+
+    private final TerimaResponApi Jwban3 = new TerimaResponApi() {
+        @Override
+        public void onGagal(ReqApiServices tool, IOException e) {
+
+        }
+
+        @Override
+        public void OnSukses(ReqApiServices tool, JSONObject Data) {
+            try {
+                String code=Data.getString("code");
+                if(code.equals("97")){
+                    code=Data.getJSONObject("message").getString("error");
+                    Log.d(TAG,code);
+                }else if(code.equals("00")){
+                    Intent intent = new Intent(PayActivity.this, ReceiptActivity.class);
+                    intent.putExtra("dataJSON", Data.getJSONObject("message").toString());
+                    intent.putExtra("dataPay", dtMethod.getJSONObject(spinner.getSelectedItemPosition()).toString());
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                }
+            } catch (JSONException e) {}
+        }
+    };
+
 
 }

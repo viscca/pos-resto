@@ -36,6 +36,21 @@
                 android:textColor="@color/darkgrey"
                 android:textStyle="bold"
                 android:typeface="sans" />
+            <EditText
+                android:id="@+id/eCariCust"
+                style="@style/MyEditText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_15dp"
+                android:layout_marginBottom="@dimen/dimens_15dp"
+                android:focusable="false"
+                android:drawableEnd="@drawable/ic_search"
+                android:hint="Cari Customer..."
+                android:inputType="textVisiblePassword"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/darkgrey" />
+
             <Spinner android:id="@+id/spinMethod"
                 style="@style/MySpinner"
                 android:layout_marginTop="@dimen/dimens_15dp"

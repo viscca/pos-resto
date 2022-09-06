@@ -54,6 +54,7 @@ public class PosFragment extends Fragment {
     private TableLayout tableList, tableTotal;
     private Button btnaddcustomer, btnpay, btnproduk, btndiskon, btnkategori;
 //    private TextView btnedit, btneditoff;
+    private androidx.appcompat.widget.AppCompatButton btnClear;
     private LinearLayout llEdit;
     private EditText eCari;
     private GridView gvMenu;
@@ -108,6 +109,8 @@ public class PosFragment extends Fragment {
 
         btnaddcustomer = binding.btnadd;
         btnaddcustomer.setOnClickListener(DiKlik);
+        btnClear = binding.btnclear;
+        btnClear.setOnClickListener(DiKlik);
         btnpay = binding.btnpay;
         btnpay.setOnClickListener(DiKlik);
         llEdit = binding.llEdit;
@@ -130,7 +133,7 @@ public class PosFragment extends Fragment {
 //        btnedit.setVisibility(View.VISIBLE);
 //        btneditoff.setVisibility(View.GONE);
         SetNoTrxID();
-        LoadChart();
+        LoadChart(false);
     }
 
     private void SetNoTrxID(){
@@ -214,7 +217,9 @@ public class PosFragment extends Fragment {
     }
 
     private final View.OnClickListener DiKlik= v-> {
-        if (v==btnaddcustomer) {
+        if (v==btnClear) {
+            LoadChart(true);
+        }else if (v==btnaddcustomer) {
             Intent intent = new Intent(getActivity(), ListCustomerActivity.class);
             startActivity(intent);
             requireActivity().overridePendingTransition(0, 0);
@@ -324,13 +329,16 @@ public class PosFragment extends Fragment {
         btnpay.setText(Hsl);
     }
 
-    private void LoadChart(){
+    private void LoadChart(boolean clear){
         SetHarga_BtnPay(-1);
+        btnClear.setEnabled(false);
         ReqApiServices X =  new ReqApiServices();
         X.EventWhenRespon=Jwban2;
         X.KodePath=5;
         X.SetAwal();
-        X.urlBuilder.addPathSegments("cart/detail");
+        String url ="cart/";
+        if(clear) url+="clear";else url+="detail";
+        X.urlBuilder.addPathSegments(url);
         X.SetAwalRequest();
         X.request.header("Apphash", MainActivity.ObjIni.DB_Setting.get_Key("HashUser"));
         RequestBody Body = new FormBody.Builder()
@@ -392,8 +400,8 @@ public class PosFragment extends Fragment {
                     final JSONObject dt= Data.getJSONObject("message").getJSONObject("cart  ");
                     final JSONArray cart= dt.getJSONArray("cart");
                     Runnable UpdateUI = () -> {
-                        InsertRow(cart);
                         InsertTotal(dt);
+                        InsertRow(cart);
                     };
                     MainActivity.ObjIni.runOnUiThread(UpdateUI);
                 }
@@ -419,9 +427,11 @@ public class PosFragment extends Fragment {
                 Hrg= Isi.getInt("total");
                 Obj=v.findViewById(R.id.col3);Obj.setText("Rp"+formatter.format(Hrg));
                 Obj=v.findViewById(R.id.txtX);
-                Obj.setOnClickListener(view -> HapusCartMin(   Isi));
+                Obj.setOnClickListener(view -> HapusCartMin(Isi));
                 tableList.addView(v);
             }
+            btnpay.setEnabled(dt.length()>0);
+            btnClear.setEnabled(dt.length()>0);
         } catch (JSONException ignored) {}
     }
 
@@ -441,11 +451,6 @@ public class PosFragment extends Fragment {
             X.request.post(Body);
             X.HitNoWait();
         } catch (JSONException ignored) {}
-    }
-
-    private void ShowDialogVarMod() {
-         //= new VariantModifierDialog(requireActivity());
-        dlgVarMod.show();
     }
 
 }

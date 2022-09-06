@@ -1,6 +1,5 @@
 package com.pos.restokasir.ui.dialog;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -13,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -23,11 +21,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.pos.restokasir.R;
-import com.pos.restokasir.adapter.ModifierAdapter;
-import com.pos.restokasir.adapter.VariantAdapter;
-import com.pos.restokasir.tools.NavigationItem;
-import com.pos.restokasir.ui.activity.LoginActivity;
-import com.pos.restokasir.ui.activity.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +28,6 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class VariantModifierDialog extends Dialog {
