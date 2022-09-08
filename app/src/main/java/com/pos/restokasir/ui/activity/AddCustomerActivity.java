@@ -191,12 +191,14 @@ public class AddCustomerActivity extends AppCompatActivity {
                 X.urlBuilder.addPathSegments("customer/"+S);
                 X.SetAwalRequest();
                 X.request.header("Apphash", DB_Setting.get_Key("HashUser"));
-                FormBody.Builder Body = new FormBody.Builder()
-                        .add("name", eNama.getText().toString())
-                        .add("email", eEmail.getText().toString())
-                        .add("address", eAlamat.getText().toString());
-                if (idCust>0) Body.add("id",idCust.toString());
-                X.request.post(Body.build());
+                final JSONObject Body = new JSONObject();
+                try{
+                    Body.put("name", eNama.getText().toString())
+                        .put("email", eEmail.getText().toString())
+                        .put("address", eAlamat.getText().toString());
+                    if (idCust>0) Body.put("id",idCust.toString());
+                } catch (JSONException ignored) {}
+                X.SetFormBody_Post(Body);
                 X.HitNoWait();
             }
         }

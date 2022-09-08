@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -58,9 +59,10 @@ public class PosFragment extends Fragment {
     private LinearLayout llEdit;
     private EditText eCari;
     private GridView gvMenu;
-    private Spinner spinner;
+    private Spinner spinner, SpinKategori;
     private SharedPreferences mSettings;
     private VariantModifierDialog dlgVarMod;
+    private JSONArray dtKategori;
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -83,26 +85,17 @@ public class PosFragment extends Fragment {
         eCari = binding.eCari;
         eCari.setOnKeyListener(TentangTombol);
 
-        TextView textView = root.findViewById(R.id.toolbar_title);
-        textView.setText("All Item");
-
         gvMenu = binding.gvproduk;
         gvMenu.setOnItemClickListener(MenuDipilih);
 
         spinner = binding.spin1;
+        SpinKategori = binding.SpinKategori;
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.metode, R.layout.spinner_item);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    public void onItemSelected(
-                            AdapterView<?> parent, View view, int position, long id) {
-                        Log.d(TAG,"Pilih Spiner");
-                        Cari_Produk();
-                    }
-
-                    public void onNothingSelected(AdapterView<?> parent) {
-                    }
-                });
+        spinner.setOnItemSelectedListener(PilihSpinner);
+        SpinKategori.setOnItemSelectedListener(PilihSpinner);
 
         tableList = binding.tbllist;
         tableTotal = binding.tbltotal;
@@ -126,6 +119,22 @@ public class PosFragment extends Fragment {
         btnkategori.setOnClickListener(DiKlik);
     }
 
+    private final AdapterView.OnItemSelectedListener PilihSpinner =new AdapterView.OnItemSelectedListener() {
+        public void onItemSelected( AdapterView<?> parent, View view, int position, long id) {
+            final ViewParent Obj= view.getParent();
+            if(Obj==spinner){
+                Log.d(TAG,"Pilih Spiner Metode");
+                Cari_Produk();
+            }else if(Obj==SpinKategori){
+                Log.d(TAG,"Pilih Spiner Kategori");
+                Cari_Produk();
+            }
+        }
+
+        public void onNothingSelected(AdapterView<?> parent) {
+        }
+    };
+
     @Override
     public void onResume() {
         super.onResume();
@@ -133,6 +142,7 @@ public class PosFragment extends Fragment {
 //        btnedit.setVisibility(View.VISIBLE);
 //        btneditoff.setVisibility(View.GONE);
         SetNoTrxID();
+        LoadKatagori();
         LoadChart(false);
     }
 
@@ -267,21 +277,26 @@ public class PosFragment extends Fragment {
     };
 
     private void Cari_Produk(){
+        if(SpinKategori.getSelectedItemPosition()<0){
+            Log.d(TAG,"Kategori blm diset");
+            return;
+        }
         ReqApiServices X =  new ReqApiServices();
         X.EventWhenRespon=Jwban1;
         X.SetAwal();
         X.urlBuilder.addPathSegments("product/list");
         X.SetAwalRequest();
         X.request.header("Apphash", MainActivity.ObjIni.DB_Setting.get_Key("HashUser"));
-        RequestBody Body = new FormBody.Builder()
-                .add("name", eCari.getText().toString())
-                .add("code","")
-                .add("description","")
-                .add("category_id","")
-                .add("page","1")
-                .add("showprice",KodePriceTipe())
-                .build();
-        X.request.post(Body);
+        final JSONObject Body = new JSONObject();
+        try{
+            Body.put("name", eCari.getText().toString())
+                    .put("code","")
+                    .put("description","")
+                    .put("category_id",getKodeKategori())
+                    .put("page","1")
+                    .put("showprice",KodePriceTipe());
+        } catch (JSONException ignored) {}
+        X.SetFormBody_Post(Body);
         X.HitNoWait();
     }
 
@@ -290,6 +305,17 @@ public class PosFragment extends Fragment {
         final int Pilih= spinner.getSelectedItemPosition();
         if(Kd.length<=Pilih) return "";
         return Kd[Pilih];
+    }
+
+    private String getKodeKategori(){
+        String Hsl="";
+        try{
+            final int Pilih= SpinKategori.getSelectedItemPosition();
+            if(dtKategori.length()<=Pilih) return Hsl;
+            final JSONObject isi= dtKategori.getJSONObject(Pilih);
+            Hsl= isi.getString("id");
+        } catch (JSONException ignored) {}
+        return Hsl;
     }
 
     private final TerimaResponApi Jwban1 = new TerimaResponApi() {
@@ -334,17 +360,17 @@ public class PosFragment extends Fragment {
         btnClear.setEnabled(false);
         ReqApiServices X =  new ReqApiServices();
         X.EventWhenRespon=Jwban2;
-        X.KodePath=5;
         X.SetAwal();
         String url ="cart/";
         if(clear) url+="clear";else url+="detail";
         X.urlBuilder.addPathSegments(url);
         X.SetAwalRequest();
         X.request.header("Apphash", MainActivity.ObjIni.DB_Setting.get_Key("HashUser"));
-        RequestBody Body = new FormBody.Builder()
-                .add("trxid",""+mSettings.getInt("NoTrx",0))
-                .build();
-        X.request.post(Body);
+        final JSONObject Body = new JSONObject();
+        try{
+            Body.put("trxid",""+mSettings.getInt("NoTrx",0));
+        } catch (JSONException ignored) {}
+        X.SetFormBody_Post(Body);
         X.HitNoWait();
     }
 
@@ -373,15 +399,14 @@ public class PosFragment extends Fragment {
             X.urlBuilder.addPathSegments("cart/add");
             X.SetAwalRequest();
             X.request.header("Apphash", MainActivity.ObjIni.DB_Setting.get_Key("HashUser"));
-            RequestBody Body = new FormBody.Builder()
-                    .add("trxid",""+mSettings.getInt("NoTrx",0))
-                    .add("modifier_id", dt.getString("modifier_id"))
-                    .add("note", dt.getString("note"))
-                    .add("product_id", Code)
-                    .add("pricetype",KodePriceTipe())
-                    .add("qty",""+dt.getInt("qty"))
-                    .build();
-            X.request.post(Body);
+            final JSONObject Body = new JSONObject();
+            Body.put("trxid",""+mSettings.getInt("NoTrx",0))
+                    .put("modifier_id", dt.getString("modifier_id"))
+                    .put("note", dt.getString("note"))
+                    .put("product_id", Code)
+                    .put("pricetype",KodePriceTipe())
+                    .put("qty",""+dt.getInt("qty"));
+            X.SetFormBody_Post(Body);
             SetHarga_BtnPay(-1);
             X.HitNoWait();
         } catch (JSONException ignored) {}
@@ -408,7 +433,6 @@ public class PosFragment extends Fragment {
             } catch (JSONException ignored) {}
         }
     };
-
 
     @SuppressLint("SetTextI18n")
     private void InsertRow(@NonNull JSONArray dt){
@@ -444,13 +468,65 @@ public class PosFragment extends Fragment {
             X.urlBuilder.addPathSegments("cart/delete");
             X.SetAwalRequest();
             X.request.header("Apphash", MainActivity.ObjIni.DB_Setting.get_Key("HashUser"));
-            RequestBody Body = new FormBody.Builder()
-                    .add("trxid",""+mSettings.getInt("NoTrx",0))
-                    .add("cart_id",""+dt.getInt("id"))
-                    .build();
-            X.request.post(Body);
+            final JSONObject Body = new JSONObject();
+            Body.put("trxid",""+mSettings.getInt("NoTrx",0))
+                    .put("cart_id",""+dt.getInt("id"));
+            X.SetFormBody_Post(Body);
             X.HitNoWait();
         } catch (JSONException ignored) {}
+    }
+
+    private void LoadKatagori(){
+        ReqApiServices X =  new ReqApiServices();
+        X.EventWhenRespon=Jwban3;
+        X.SetAwal();
+        X.urlBuilder.addPathSegments("category/list");
+        X.SetAwalRequest();
+        X.request.header("Apphash", MainActivity.ObjIni.DB_Setting.get_Key("HashUser"));
+        final JSONObject Body = new JSONObject();
+        try{
+            Body.put("page","1")
+                .put("name","");
+        } catch (JSONException ignored) {}
+        X.SetFormBody_Post(Body);
+        X.HitNoWait();
+    }
+
+    private final TerimaResponApi Jwban3 = new TerimaResponApi() {
+        @Override
+        public void onGagal(ReqApiServices tool, IOException e) {
+
+        }
+
+        @Override
+        public void OnSukses(ReqApiServices tool, JSONObject Data) {
+            try {
+                if (Data.getString("code").equals("00")) {
+                    dtKategori= new JSONArray(Data.getJSONObject("message").getJSONArray("data").toString());
+                    JSONObject El=new JSONObject();
+                    El.put("id", "");
+                    El.put("description", "Semua Item");
+                    dtKategori.put(0, El);
+                    Runnable UpdateUI = () -> {
+                        SetSpinKategori();
+                    };
+                    MainActivity.ObjIni.runOnUiThread(UpdateUI);
+                }
+            } catch (JSONException ignored) {}
+        }
+    };
+
+    private void SetSpinKategori(){
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(getContext(),
+                android.R.layout.simple_spinner_dropdown_item);
+        try {
+            for (int i=0; i < dtKategori.length(); i++) {
+                final JSONObject Isi = dtKategori.getJSONObject(i);
+                adapter.add(Isi.getString("description"));
+            }
+        } catch (JSONException ignored) {}
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        SpinKategori.setAdapter(adapter);
     }
 
 }

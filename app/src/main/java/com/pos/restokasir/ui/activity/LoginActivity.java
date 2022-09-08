@@ -90,11 +90,13 @@ public class LoginActivity extends Activity {
                 X.SetAwal();
                 X.urlBuilder.addPathSegments("login/request");
                 X.SetAwalRequest();
-                X.request.post(new FormBody.Builder()
-                        .add("email", DB_Setting.mSettings.getString("idUser",""))
-                        .add("password", ePassword.getText().toString())
-                        .build());
-                //kasir@test.com
+                final JSONObject Body = new JSONObject();
+                try{
+                    Body.put("email", DB_Setting.mSettings.getString("idUser",""))
+                        .put("password", ePassword.getText().toString());
+                    //kasir@test.com
+                } catch (JSONException ignored) {}
+                X.SetFormBody_Post(Body);
                 X.HitNoWait();
             }
         }

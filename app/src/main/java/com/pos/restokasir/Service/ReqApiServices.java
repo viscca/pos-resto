@@ -2,10 +2,14 @@ package com.pos.restokasir.Service;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Iterator;
+
 import okhttp3.*;
 
 public class ReqApiServices {
@@ -23,7 +27,12 @@ public class ReqApiServices {
     public TerimaResponApi EventWhenRespon;
 
     public ReqApiServices() {
-        KodePath=0; JmlErr=0;
+        SetKodePath_Acak(); JmlErr=0;
+    }
+
+    public void SetKodePath_Acak(){
+        int I= 1000;
+        KodePath= (int) (Math.random() * I + 1);
     }
 
     public void SetAwal(){
@@ -35,7 +44,7 @@ public class ReqApiServices {
         final String sURL=urlBuilder.build().toString();
         request.header("Appkey", Appkey)
                 .url(sURL);
-        Log.d(TAG, "Set Awal Request. URL: "+sURL);
+        Log.d(TAG, "Set Awal Request ("+KodePath+"). URL: "+sURL);
     }
 
     public String SendRequest() throws IOException {
@@ -66,16 +75,15 @@ public class ReqApiServices {
         @Override
         public void onResponse(Call call, Response response) throws IOException {
             try {
-                Log.d(TAG, "Respon: "+ response);
                 if (response.isSuccessful()) {
                     String responseString = response.body().string();
-                    Log.d(TAG, "Respon: "+ responseString);
+                    Log.d(TAG, "Respon ("+KodePath+"): "+ responseString);
                     OlahRespon(responseString);
                 } else {
-                    Log.d(TAG, "Error "+ response);
+                    Log.d(TAG, "Error ("+KodePath+"): "+ response);
                 }
             } catch (IOException e) {
-                Log.d(TAG, "Exception caught : ", e);
+                Log.d(TAG, "Exception caught ("+KodePath+ "): ", e);
             }
         }
     };
@@ -88,5 +96,16 @@ public class ReqApiServices {
         } catch (JSONException e) {}
     }
 
+    public void SetFormBody_Post(@NonNull JSONObject data) {
+        final FormBody.Builder Body = new FormBody.Builder();
+        try {
+            for (Iterator<String> iter = data.keys(); iter.hasNext(); ) {
+                String key = iter.next();
+                Body.add(key, data.getString(key));
+            }
+            request.post(Body.build());
+            Log.d(TAG, "POST Form ("+KodePath+"): "+ data.toString());
+        } catch (JSONException ignored) {}
+    }
 
 }

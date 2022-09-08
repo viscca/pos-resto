@@ -78,8 +78,8 @@ public class SplashActivity extends Activity {
         X.urlBuilder.addPathSegments("profile/info");
         X.SetAwalRequest();
         X.request.header("Apphash", HashUser);
-        X.request.post(new FormBody.Builder()
-                .build());
+        final JSONObject Body = new JSONObject();
+        X.SetFormBody_Post(Body);
         X.HitNoWait();
     }
 

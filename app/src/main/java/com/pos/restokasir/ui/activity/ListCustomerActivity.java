@@ -119,11 +119,12 @@ public class ListCustomerActivity extends AppCompatActivity {
         X.urlBuilder.addPathSegments("customer/list");
         X.SetAwalRequest();
         X.request.header("Apphash", DB_Setting.get_Key("HashUser"));
-        RequestBody Body = new FormBody.Builder()
-                .add("name", eCari.getText().toString())
-                .add("page","1")
-                .build();
-        X.request.post(Body);
+        final JSONObject Body = new JSONObject();
+        try{
+            Body.put("name", eCari.getText().toString())
+                .put("page","1");
+        } catch (JSONException ignored) {}
+        X.SetFormBody_Post(Body);
         X.HitNoWait();
     }
 

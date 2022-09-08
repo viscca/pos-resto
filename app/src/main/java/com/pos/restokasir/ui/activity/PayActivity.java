@@ -86,10 +86,11 @@ public class PayActivity extends AppCompatActivity {
         X.urlBuilder.addPathSegments("checkout/bill");
         X.SetAwalRequest();
         X.request.header("Apphash", DB_Setting.get_Key("HashUser"));
-        RequestBody Body = new FormBody.Builder()
-                .add("trxid",""+DB_Setting.mSettings.getInt("NoTrx",0))
-                .build();
-        X.request.post(Body);
+        final JSONObject Body = new JSONObject();
+        try{
+            Body.put("trxid",""+DB_Setting.mSettings.getInt("NoTrx",0));
+        } catch (JSONException ignored) {}
+        X.SetFormBody_Post(Body);
         X.HitNoWait();
     }
 
@@ -171,11 +172,12 @@ public class PayActivity extends AppCompatActivity {
         X.urlBuilder.addPathSegments("checkout/listpayment");
         X.SetAwalRequest();
         X.request.header("Apphash", DB_Setting.get_Key("HashUser"));
-        RequestBody Body = new FormBody.Builder()
-                .add("page","1")
-                .add("name","")
-                .build();
-        X.request.post(Body);
+        final JSONObject Body = new JSONObject();
+        try{
+            Body.put("page","1")
+                .put("name","");
+        } catch (JSONException ignored) {}
+        X.SetFormBody_Post(Body);
         X.HitNoWait();
     }
 
@@ -247,14 +249,14 @@ public class PayActivity extends AppCompatActivity {
         X.urlBuilder.addPathSegments("checkout/pay");
         X.SetAwalRequest();
         X.request.header("Apphash", DB_Setting.get_Key("HashUser"));
-        FormBody.Builder Body = new FormBody.Builder()
-                .add("trxid",""+DB_Setting.mSettings.getInt("NoTrx",0));
-        try {
+        final JSONObject Body = new JSONObject();
+        try{
+            Body.put("trxid",""+DB_Setting.mSettings.getInt("NoTrx",0));
             final JSONObject Isi = dtMethod.getJSONObject(spinner.getSelectedItemPosition());
-            Body.add("paymethod",Isi.getString("id"))
-                .add("totalpayment",eJumlah.getText().toString());
-            Body.add("customer_id",dlgCust.Hasil.getString("id"));
-            X.request.post(Body.build());
+            Body.put("paymethod",Isi.getString("id"))
+                    .put("totalpayment",eJumlah.getText().toString())
+                    .put("customer_id",dlgCust.Hasil.getString("id"));
+            X.SetFormBody_Post(Body);
             X.HitNoWait();
         } catch (JSONException ignored) {}
     }

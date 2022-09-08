@@ -30,9 +30,8 @@
             android:singleLine="true"
             android:textColor="@color/darkgrey" />
 
-        <include
-            android:id="@+id/toolbar_actionbar"
-            layout="@layout/toolbar_menu"
+        <Spinner
+            android:id="@+id/SpinKategori"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
