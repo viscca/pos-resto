@@ -45,8 +45,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
-import okhttp3.FormBody;
-import okhttp3.RequestBody;
 
 public class PosFragment extends Fragment {
     private final String TAG="Prs_FragmentPOS";
@@ -63,6 +61,7 @@ public class PosFragment extends Fragment {
     private SharedPreferences mSettings;
     private VariantModifierDialog dlgVarMod;
     private JSONArray dtKategori;
+
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -393,7 +392,7 @@ public class PosFragment extends Fragment {
         try {
             String Code = dt.getString("id");
             ReqApiServices X =  new ReqApiServices();
-            X.KodePath=25;
+            //X.KodePath=25;
             X.EventWhenRespon=Jwban2;
             X.SetAwal();
             X.urlBuilder.addPathSegments("cart/add");

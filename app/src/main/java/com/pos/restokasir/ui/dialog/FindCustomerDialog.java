@@ -31,8 +31,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Objects;
 
-import okhttp3.FormBody;
-import okhttp3.RequestBody;
 
 public class FindCustomerDialog extends Dialog {
     private final String TAG = "Prs_DlgCustomer";

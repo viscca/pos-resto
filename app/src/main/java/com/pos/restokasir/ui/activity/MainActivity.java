@@ -2,6 +2,8 @@ package com.pos.restokasir.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     public static MainActivity ObjIni;
     private AppBarConfiguration mAppBarConfiguration;
     public C_DB_Setting DB_Setting;
+    private int KlikBack=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,4 +85,30 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    @Override
+    public void onBackPressed() {
+        if (KlikBack>0) {
+            super.onBackPressed();
+            overridePendingTransition(0, 0);
+            return;
+        }
+
+        KlikBack++;
+        BuatToast( "Please click BACK again to exit" );
+
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                KlikBack=0;
+            }
+        }, 2000);
+    }
+
+    public void BuatToast(String Txt){
+        Runnable UpdateUI = () -> Toast.makeText(MainActivity.ObjIni, Txt, Toast.LENGTH_LONG ).show();
+        runOnUiThread(UpdateUI);
+    }
+
 }

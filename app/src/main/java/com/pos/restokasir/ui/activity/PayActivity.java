@@ -32,8 +32,6 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
-import okhttp3.FormBody;
-import okhttp3.RequestBody;
 
 public class PayActivity extends AppCompatActivity {
     private final String TAG="Prs_PaymentAct";

@@ -23,7 +23,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import okhttp3.FormBody;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends Activity {
@@ -67,7 +66,7 @@ public class SplashActivity extends Activity {
             Intent newActivity = new Intent(SplashActivity.this,
                     LoginActivity.class);
             startActivity(newActivity);
-            SplashActivity.this.finish();
+            finish();
         }, SPLASH_TIMEOUT);
     }
 
@@ -98,6 +97,7 @@ public class SplashActivity extends Activity {
                     newIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(newIntent);
                     overridePendingTransition(0, 0);
+                    finish();
                 }
                 return;
             } catch (JSONException ignored) {}

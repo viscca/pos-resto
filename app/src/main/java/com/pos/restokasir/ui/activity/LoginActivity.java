@@ -20,7 +20,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import okhttp3.FormBody;
 
 public class LoginActivity extends Activity {
     private final String TAG="Prs_LoginActivity";
